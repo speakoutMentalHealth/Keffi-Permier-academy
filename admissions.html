@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Keffi Premier Academy">
+<title>Admissions | Keffi Premier Academy</title>
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="container nav-wrap">
+    <a class="brand" href="index.html" aria-label="Keffi Premier Academy home">
+      <div class="brand-mark">KPA</div>
+      <div class="brand-text"><strong>Keffi Premier Academy</strong><span>Academic Excellence • Wellbeing • Leadership</span></div>
+    </a>
+    <button class="mobile-toggle" aria-label="Open menu">☰</button>
+    <nav class="nav" aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="academics.html">Academics</a>
+      <a href="admissions.html">Admissions</a>
+      <a href="wellness.html">Premier Wellness Club</a>
+      <a href="news.html">News</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="contact.html">Contact</a>
+      <a class="btn btn-primary btn-sm nav-cta" href="portal.html">Portal Access</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="page-hero"><div class="container"><div class="eyebrow">Admissions</div><h1>Start your child's journey with Keffi Premier Academy.</h1><p class="lead">This page is ready for the School's official admission requirements, fees, entry process and prospectus.</p></div></section>
+<section class="section"><div class="container split">
+<div><h2>Admission Enquiry</h2><p class="lead">Send an enquiry and the School can follow up with next steps.</p><div class="callout"><strong>Important:</strong> This frontend demo does not send data anywhere yet. Connect this form to Formspree, Firebase, Supabase, or your chosen backend before launch.</div></div>
+<form class="card form-grid" data-demo-form>
+<div class="field"><label>Parent/Guardian Name</label><input required type="text" placeholder="Full name"></div>
+<div class="field"><label>Phone Number</label><input required type="tel" placeholder="+234..."></div>
+<div class="field"><label>Email</label><input type="email" placeholder="name@example.com"></div>
+<div class="field"><label>Student Class of Interest</label><input type="text" placeholder="e.g. JSS 1"></div>
+<div class="field full"><label>Message</label><textarea placeholder="Tell us what you would like to know"></textarea></div>
+<div class="field full"><button class="btn btn-primary" type="submit">Submit Enquiry</button><div data-form-message></div></div>
+</form>
+</div></section>
+</main>
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="brand">
+          <div class="brand-mark">KPA</div>
+          <div class="brand-text"><strong>Keffi Premier Academy</strong><span>Building capable, confident and healthy learners.</span></div>
+        </div>
+        <p style="margin-top:18px;color:#c2d3cd;max-width:420px">A modern school community focused on academic excellence, student wellbeing, leadership and future readiness.</p>
+      </div>
+      <div><h4>School</h4><p><a href="about.html">About</a></p><p><a href="academics.html">Academics</a></p><p><a href="admissions.html">Admissions</a></p></div>
+      <div><h4>Student Life</h4><p><a href="wellness.html">Premier Wellness Club</a></p><p><a href="news.html">News & Events</a></p><p><a href="gallery.html">Gallery</a></p></div>
+      <div><h4>Quick Access</h4><p><a href="portal.html">Student Portal</a></p><p><a href="portal.html">Parent Portal</a></p><p><a href="portal.html">Admin Portal</a></p></div>
+    </div>
+    <div class="footer-bottom">© <span id="year"></span> Keffi Premier Academy. All rights reserved.</div>
+  </div>
+</footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+<script src="assets/js/main.js"></script>
+</body></html>
