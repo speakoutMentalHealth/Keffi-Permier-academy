@@ -390,3 +390,33 @@
     }
   });
 })();
+
+
+/* V10 NAVIGATION STRUCTURE GUARD */
+(() => {
+  const drawer=document.querySelector('.mobile-menu');
+  const mobileButtons=[...document.querySelectorAll('.mobile-app-header [data-menu], .mobile-menu [data-menu]')];
+  mobileButtons.forEach(btn=>{
+    btn.addEventListener('click',e=>{
+      e.stopPropagation();
+      const isClose=btn.classList.contains('mobile-close');
+      if(isClose) drawer?.classList.remove('open');
+      else drawer?.classList.add('open');
+      document.body.classList.toggle('no-scroll',!!drawer?.classList.contains('open'));
+    },true);
+  });
+})();
+
+
+/* V11 CLEAN NAV ACTIVE STATE */
+(() => {
+  const file=(location.pathname.split('/').pop()||'index.html').split('?')[0];
+  document.querySelectorAll('.clean-nav > a').forEach(a=>{
+    const href=(a.getAttribute('href')||'').split('?')[0];
+    if(href===file){
+      a.style.background='#f2edf9';
+      a.style.color='var(--purple)';
+      a.setAttribute('aria-current','page');
+    }
+  });
+})();
