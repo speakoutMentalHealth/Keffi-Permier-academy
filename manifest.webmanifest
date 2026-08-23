@@ -1,0 +1,9 @@
+{
+  "name": "Keffi Premier Academy",
+  "short_name": "KPA",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#fbf8f2",
+  "theme_color": "#2b146e",
+  "icons": []
+}
