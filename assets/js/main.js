@@ -110,4 +110,78 @@
   $('[data-text-size]')?.addEventListener('click',()=>document.body.classList.toggle('large-text'));
   $('[data-contrast]')?.addEventListener('click',()=>document.body.classList.toggle('high-contrast'));
   $('[data-motion]')?.addEventListener('click',()=>document.body.classList.toggle('reduce-motion'));
+
+  // V6 announcement carousel
+  const annItems=$$('.announcement-item'),annDots=$$('.announcement-dot');
+  if(annItems.length){
+    let ai=0,atimer;
+    const announce=i=>{
+      ai=(i+annItems.length)%annItems.length;
+      annItems.forEach((x,n)=>x.classList.toggle('active',n===ai));
+      annDots.forEach((x,n)=>x.classList.toggle('active',n===ai));
+    };
+    const restartAnn=()=>{
+      clearInterval(atimer);
+      if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
+        atimer=setInterval(()=>announce(ai+1),4800);
+      }
+    };
+    $('[data-ann-prev]')?.addEventListener('click',()=>{announce(ai-1);restartAnn()});
+    $('[data-ann-next]')?.addEventListener('click',()=>{announce(ai+1);restartAnn()});
+    annDots.forEach((d,i)=>d.addEventListener('click',()=>{announce(i);restartAnn()}));
+    restartAnn();
+  }
+
+  // V6 adventure map
+  const adventureData={
+    learn:['Start with learning.','Explore lessons, literacy, science and the skills that turn curiosity into confidence.'],
+    build:['Turn ideas into things.','Use ICT, STEM and practical projects to test, build and improve your ideas.'],
+    connect:['Find your people.','Clubs, teamwork, culture, friendship and wellbeing activities create places to belong.'],
+    lead:['Use your voice well.','Leadership, service and mentoring help students practise responsibility and positive influence.']
+  };
+  $$('[data-adventure-step]').forEach(b=>b.addEventListener('click',()=>{
+    $$('[data-adventure-step]').forEach(x=>x.classList.remove('active'));b.classList.add('active');
+    const d=adventureData[b.dataset.adventureStep],box=$('#adventureDetail');
+    if(box&&d){box.innerHTML=`<h3>${d[0]}</h3><p>${d[1]}</p>`;box.animate([{opacity:.35,transform:'translateY(6px)'},{opacity:1,transform:'none'}],{duration:260,easing:'ease-out'})}
+  }));
+
+  // V6 curiosity door
+  $('#curiosityBtn')?.addEventListener('click',()=>{
+    const box=$('#curiosityBox');box?.classList.toggle('open');
+    const btn=$('#curiosityBtn');if(btn)btn.textContent=box?.classList.contains('open')?'Close the door':'Open the door';
+  });
+
+  // V6 safe celebration feedback
+  function celebrate(origin){
+    if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+    const layer=document.createElement('div');layer.className='celebration-layer';document.body.appendChild(layer);
+    const colors=['#d8b766','#6b49bf','#2f6d58','#25788a','#f1da95'];
+    const rect=origin?.getBoundingClientRect?.()||{left:innerWidth/2,top:innerHeight/2,width:0,height:0};
+    for(let i=0;i<22;i++){
+      const c=document.createElement('span');c.className='confetti';c.style.background=colors[i%colors.length];
+      c.style.left=(rect.left+rect.width/2)+'px';c.style.top=(rect.top+rect.height/2)+'px';
+      c.style.setProperty('--dx',((Math.random()-.5)*280)+'px');c.style.setProperty('--dy',(80+Math.random()*220)+'px');
+      c.style.animationDelay=(Math.random()*.12)+'s';layer.appendChild(c)
+    }
+    setTimeout(()=>layer.remove(),1500)
+  }
+  const qz=$('#studentQuiz');
+  if(qz){
+    $$('.choice',qz).forEach(c=>c.addEventListener('click',()=>{
+      if(c.dataset.correct==='true'){
+        $('#badgeExplorer')?.classList.add('unlocked');celebrate(c);
+      }
+    }));
+  }
+
+  // V6 subtle tilt on desktop pointer devices
+  if(matchMedia('(hover:hover) and (pointer:fine)').matches && !matchMedia('(prefers-reduced-motion: reduce)').matches){
+    $$('[data-tilt]').forEach(card=>{
+      card.addEventListener('pointermove',e=>{
+        const r=card.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+        card.style.transform=`perspective(800px) rotateX(${(-y*4).toFixed(2)}deg) rotateY(${(x*5).toFixed(2)}deg) translateY(-6px)`;
+      });
+      card.addEventListener('pointerleave',()=>card.style.transform='');
+    });
+  }
 })();
