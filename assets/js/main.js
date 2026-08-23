@@ -349,3 +349,44 @@
     });
   }
 })();
+
+
+/* FINAL V9 HARDENING */
+(() => {
+  const $=(s,c=document)=>c.querySelector(s);
+  const $$=(s,c=document)=>[...c.querySelectorAll(s)];
+
+  // Ensure one mobile drawer state only
+  const drawer=$('.mobile-menu');
+  $$('[data-menu]').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const open=drawer?.classList.contains('open');
+      setTimeout(()=>{
+        document.body.classList.toggle('no-scroll',!!drawer?.classList.contains('open'));
+      },0);
+    });
+  });
+
+  // Close drawer on Escape
+  document.addEventListener('keydown',e=>{
+    if(e.key==='Escape'){
+      drawer?.classList.remove('open');
+      document.body.classList.remove('no-scroll');
+      $('.search-modal')?.classList.remove('open');
+      $('.kpa-concierge')?.classList.remove('open');
+    }
+  });
+
+  // Prevent fixed dock from covering anchors on phones
+  if(matchMedia('(max-width:767px)').matches){
+    document.documentElement.style.scrollPaddingBottom='110px';
+  }
+
+  // Make ticker continuously move after page restore / bfcache
+  addEventListener('pageshow',()=>{
+    const track=$('.ticker-track');
+    if(track && matchMedia('(max-width:767px)').matches){
+      track.style.animationPlayState='running';
+    }
+  });
+})();
