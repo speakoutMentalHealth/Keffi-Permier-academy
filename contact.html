@@ -3,7 +3,7 @@
 <meta name="description" content="Keffi Premier Academy"><meta name="theme-color" content="#2b146e">
 <title>Contact Us | Keffi Premier Academy</title>
 <link rel="icon" href="assets/images/kpa-logo.jpg"><link rel="manifest" href="manifest.webmanifest">
-<link rel="stylesheet" href="assets/css/styles.css?v=11.0.0">
+<link rel="stylesheet" href="assets/css/styles.css?v=14.0.0">
 </head><body>
 <div class="announcement" aria-label="School announcements">
   <div class="container announcement-shell">
@@ -118,8 +118,8 @@
 </div>
 
 <main><section class="page-hero" style="background-image:linear-gradient(90deg,rgba(26,10,73,.95),rgba(26,10,73,.35)),url('assets/images/muslim-students-girls.jpg')"><div class="container"><div class="kicker" style="color:var(--gold2)">Contact Us</div><h1>We would be pleased to hear from you.</h1><p>Use WhatsApp, telephone, email, enquiry forms and map access to make communication effortless.</p></div></section>
-<section class="section"><div class="container contact-grid"><div><div class="kicker">School Contact</div><h2>Connect with KPA.</h2><p><strong>Address</strong><br>Replace with official school address</p><p><strong>Phone</strong><br>Replace with official number</p><p><strong>Email</strong><br>Replace with official email</p><div class="quick-contact"><a href="#">WhatsApp</a><a href="#">Call</a><a href="#">Email</a></div><div class="card" style="margin-top:18px"><strong>Google Maps</strong><p class="muted">Embed the official school location here after the exact address is confirmed.</p></div></div>
-<form class="card form-grid" data-demo-form><div class="field"><label>Name</label><input required></div><div class="field"><label>Phone</label><input></div><div class="field full"><label>Email</label><input type="email"></div><div class="field full"><label>Reason for contact</label><select><option>General enquiry</option><option>Admissions</option><option>Premier Wellness Club</option><option>Portal support</option></select></div><div class="field full"><label>Message</label><textarea></textarea></div><div class="field full"><button class="btn btn-primary">Send Enquiry</button><p data-form-msg class="muted"></p></div></form></div></section></main>
+<section class="section"><div class="container contact-grid"><div><div class="kicker">School Contact</div><h2>Connect with KPA.</h2><p><strong>Address</strong><br><span data-setting="school_address">Keffi, Nasarawa State, Nigeria</span></p><p><strong>Phone</strong><br><span data-setting="school_phone">School telephone</span></p><p><strong>Email</strong><br><span data-setting="school_email">School email</span></p><div class="quick-contact"><a href="#" data-setting-href="whatsapp">WhatsApp</a><a href="#" data-setting-href="school_phone">Call</a><a href="#" data-setting-href="school_email">Email</a></div><div class="card" style="margin-top:18px"><strong>Location</strong><p class="muted">Contact the School for directions or use the published address above.</p></div></div>
+<form class="card form-grid" id="contactForm"><div class="field"><label>Name</label><input name="name" required></div><div class="field"><label>Phone</label><input name="phone" type="tel"></div><div class="field full"><label>Email</label><input name="email" type="email"></div><div class="field full"><label>Reason for contact</label><select name="enquiry_type"><option>General enquiry</option><option>Admissions</option><option>Premier Wellness Club</option><option>Portal support</option></select></div><div class="field full"><label>Message</label><textarea name="message" required></textarea></div><div class="field full"><button class="btn btn-primary">Send Enquiry</button><p id="contactMessage" class="muted" aria-live="polite"></p></div></form></div></section></main>
 
 <nav class="mobile-app-dock" aria-label="Mobile app navigation">
   <a href="index.html" data-dock="index"><span>⌂</span><span>Home</span></a>
@@ -168,9 +168,10 @@
       <div><h4>Families</h4><a href="admissions.html">Admissions</a><a href="downloads.html">Downloads</a><a href="faq.html">FAQs</a><a href="contact.html">Contact</a></div>
       <div><h4>Digital Access</h4><a href="portal.html">Student Portal</a><a href="portal.html">Parent Resources</a><a href="portal.html">Teacher Resources</a><a href="portal.html">Admin Access</a></div>
     </div>
-    <div style="margin-top:28px;display:flex;gap:10px;flex-wrap:wrap"><span style="font-weight:800;color:#fff">Follow KPA:</span><a href="#" title="Replace with official Facebook URL">Facebook</a><a href="#" title="Replace with official Instagram URL">Instagram</a><a href="#" title="Replace with official YouTube URL">YouTube</a><a href="#" title="Replace with official TikTok URL">TikTok</a></div><div class="footer-bottom"><span>© <span id="year"></span> Keffi Premier Academy. All rights reserved.</span><span>Website prototype — replace placeholders with approved school content before launch.</span></div>
+    <div class="footer-bottom"><span>© <span id="year"></span> Keffi Premier Academy. All rights reserved.</span><span>Knowledge • Character • Wellbeing</span></div>
   </div>
 </footer>
 <script>document.getElementById('year').textContent=new Date().getFullYear()</script>
-<script src="assets/js/supabase-config.js"></script><script type="module" src="assets/js/cms.js"></script><script src="assets/js/main.js?v=11.0.0"></script>
+<script src="assets/js/supabase-config.js"></script><script type="module" src="assets/js/cms.js?v=14.0.0"></script><script type="module" src="assets/js/contact.js?v=14.0.0"></script>
+<script src="assets/js/main.js?v=14.0.0"></script>
 <script>if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js').catch(()=>{}));}</script></body></html>
