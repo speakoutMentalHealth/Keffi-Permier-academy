@@ -1427,3 +1427,282 @@ body{
   .proof-grid{grid-template-columns:repeat(2,1fr)}
   .proof-stat:nth-child(odd){border-left:0}
 }
+
+
+/* =========================================================
+   FINAL V9 — CLEAN RESPONSIVE OVERRIDES
+   One desktop header. One mobile app header. No duplicates.
+   ========================================================= */
+
+/* default desktop/tablet state */
+.mobile-app-header,
+.mobile-app-dock,
+.mobile-install-banner,
+.mobile-menu{display:none}
+
+/* desktop website */
+@media(min-width:1024px){
+  .utility{display:block}
+  .announcement{display:block}
+  .site-header{display:block}
+  .mobile-app-header,.mobile-app-dock,.mobile-menu{display:none!important}
+  body{padding-bottom:0!important}
+}
+
+/* tablet */
+@media(min-width:768px) and (max-width:1023px){
+  .utility{display:block}
+  .announcement{display:block}
+  .site-header{display:block}
+  .mobile-app-header,.mobile-app-dock,.mobile-menu{display:none!important}
+  body{padding-bottom:0!important}
+}
+
+/* PHONE APP EXPERIENCE */
+@media(max-width:767px){
+  html,body{max-width:100%;overflow-x:hidden}
+  body{
+    background:#f7f4fb;
+    padding-bottom:calc(92px + env(safe-area-inset-bottom,0px))!important
+  }
+
+  /* desktop chrome must never leak into mobile */
+  .utility,
+  .site-header,
+  .main-nav,
+  .nav-actions,
+  .menu-toggle,
+  .desktop-only{display:none!important}
+
+  /* remove old install prompt permanently */
+  .mobile-install-banner{display:none!important}
+
+  /* announcement: compact, readable, actually moving */
+  .announcement{
+    display:block!important;
+    position:sticky;
+    top:0;
+    z-index:90;
+    min-height:42px;
+    padding-top:env(safe-area-inset-top,0px);
+    overflow:hidden
+  }
+  .announcement .container{
+    width:100%!important;
+    padding:0 12px!important;
+    min-height:42px;
+    display:flex;
+    align-items:center;
+    gap:10px
+  }
+  .announcement strong{display:none!important}
+  .ticker{
+    flex:1;
+    overflow:hidden;
+    white-space:nowrap;
+    font-size:.78rem;
+    line-height:1.2;
+    font-weight:850
+  }
+  .ticker-track{
+    display:inline-flex!important;
+    gap:42px;
+    width:max-content;
+    animation:ticker 22s linear infinite!important
+  }
+  .ticker:hover .ticker-track{animation-play-state:running!important}
+  @keyframes ticker{to{transform:translateX(-50%)}}
+
+  /* single mobile app header */
+  .mobile-app-header{
+    display:flex!important;
+    position:sticky;
+    top:calc(42px + env(safe-area-inset-top,0px));
+    z-index:89;
+    min-height:72px;
+    padding:8px 12px;
+    align-items:center;
+    justify-content:space-between;
+    background:rgba(255,253,249,.98);
+    backdrop-filter:blur(18px);
+    border-bottom:1px solid rgba(43,20,110,.08);
+    box-shadow:0 7px 22px rgba(43,20,110,.06)
+  }
+  .mobile-app-brand{min-width:0;flex:1}
+  .mobile-app-brand img{width:50px;height:50px}
+  .mobile-app-brand-copy strong{
+    font-size:clamp(.92rem,4.5vw,1.12rem);
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis
+  }
+  .mobile-app-brand-copy span{font-size:.58rem}
+  .mobile-app-actions{display:flex!important;gap:8px}
+  .mobile-app-actions .mobile-app-icon{
+    display:grid!important;
+    width:46px;height:46px;
+    flex:0 0 46px
+  }
+
+  /* mobile drawer exists only when opened */
+  .mobile-menu{
+    display:none!important;
+    position:fixed;
+    inset:0;
+    z-index:150;
+    overflow:auto;
+    padding:calc(18px + env(safe-area-inset-top,0px)) 14px calc(30px + env(safe-area-inset-bottom,0px));
+  }
+  .mobile-menu.open{display:block!important}
+
+  /* no stray legacy mobile menu links outside drawer */
+  body > .mobile-close{display:none!important}
+
+  /* app dock */
+  .mobile-app-dock{
+    display:grid!important;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    position:fixed;
+    left:10px;
+    right:10px;
+    bottom:calc(8px + env(safe-area-inset-bottom,0px));
+    z-index:100;
+    min-height:66px;
+    padding:7px;
+    border-radius:24px;
+    background:rgba(255,255,255,.97);
+    backdrop-filter:blur(20px);
+    border:1px solid rgba(43,20,110,.11);
+    box-shadow:0 18px 40px rgba(35,19,79,.20)
+  }
+  .mobile-app-dock a{
+    min-height:52px;
+    border-radius:17px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:1px
+  }
+
+  /* accessibility control belongs inside drawer on phones, not floating over content */
+  .a11y-panel{display:none!important}
+
+  /* concierge moved above dock and kept compact */
+  .kpa-concierge-launcher{
+    right:14px!important;
+    bottom:calc(88px + env(safe-area-inset-bottom,0px))!important;
+    width:48px!important;height:48px!important;
+    border-radius:16px!important
+  }
+  .kpa-concierge{
+    left:10px!important;
+    right:10px!important;
+    bottom:calc(146px + env(safe-area-inset-bottom,0px))!important;
+    width:auto!important;
+    max-height:58vh!important
+  }
+
+  /* SIGNATURE HERO: fit the phone, keep copy above dock */
+  .signature-hero{
+    margin:10px 10px 0!important;
+    min-height:calc(100svh - 124px)!important;
+    max-height:none!important;
+    border-radius:30px!important
+  }
+  .signature-hero-inner{
+    min-height:calc(100svh - 124px)!important;
+    display:flex!important;
+    align-items:flex-end!important;
+    padding:
+      210px
+      20px
+      calc(118px + env(safe-area-inset-bottom,0px))
+      20px!important
+  }
+  .signature-hero-copy{width:100%}
+  .signature-hero h1{
+    font-size:clamp(2.55rem,12.5vw,4rem)!important;
+    line-height:.93!important;
+    max-width:100%!important;
+    text-wrap:balance
+  }
+  .signature-hero-lead{
+    font-size:.9rem!important;
+    line-height:1.45!important;
+    -webkit-line-clamp:3!important
+  }
+  .signature-hero .actions{
+    gap:8px!important;
+    margin-top:18px!important
+  }
+  .signature-hero .actions .btn{
+    min-height:43px!important;
+    padding:0 14px!important;
+    font-size:.75rem!important
+  }
+
+  /* interior page hero */
+  .page-hero{
+    margin:10px 10px 0!important;
+    min-height:360px!important;
+    border-radius:30px!important
+  }
+  .page-hero .container{
+    padding:
+      120px
+      22px
+      calc(42px + env(safe-area-inset-bottom,0px))
+      22px!important
+  }
+  .page-hero h1{
+    font-size:clamp(2.35rem,11vw,3.7rem)!important;
+    line-height:.98!important
+  }
+
+  /* make page content feel like an app canvas */
+  main{padding-top:0}
+  .section{padding:56px 0!important}
+  .section>.container{width:calc(100% - 24px)!important}
+  h2{font-size:clamp(2rem,9vw,3rem)!important}
+  .lead{font-size:.97rem!important}
+
+  /* no accidental fixed controls over body text */
+  .floating-actions,
+  .mobile-dock{display:none!important}
+
+  /* horizontal components use intentional snap, no page overflow */
+  .values-grid,.page-grid,.mobile-snap,.audience-tabs,.day-time,.journey-tabs{
+    max-width:100%;
+    overflow-x:auto!important;
+    overscroll-behavior-x:contain;
+    -webkit-overflow-scrolling:touch
+  }
+
+  /* final content breathing room above fixed dock */
+  footer{padding-bottom:calc(118px + env(safe-area-inset-bottom,0px))!important}
+}
+
+/* Small phones 320–359 */
+@media(max-width:359px){
+  .mobile-app-header{padding-inline:9px}
+  .mobile-app-brand img{width:44px;height:44px}
+  .mobile-app-brand-copy strong{font-size:.88rem}
+  .mobile-app-actions .mobile-app-icon{width:40px;height:40px;flex-basis:40px}
+  .signature-hero{margin-inline:7px!important}
+  .signature-hero-inner{padding-inline:16px!important}
+  .signature-hero h1{font-size:2.35rem!important}
+  .mobile-app-dock{left:6px;right:6px}
+}
+
+/* Large phones */
+@media(min-width:430px) and (max-width:767px){
+  .signature-hero{margin-inline:14px!important}
+  .signature-hero-inner{padding-left:26px!important;padding-right:26px!important}
+}
+
+/* stop motion for reduced-motion users */
+@media(prefers-reduced-motion:reduce){
+  .ticker-track{animation:none!important}
+  .living-crest:before,.living-crest:after{animation:none!important}
+}
