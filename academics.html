@@ -3,24 +3,18 @@
 <meta name="description" content="Keffi Premier Academy"><meta name="theme-color" content="#2b146e">
 <title>Academics | Keffi Premier Academy</title>
 <link rel="icon" href="assets/images/kpa-logo.jpg"><link rel="manifest" href="manifest.webmanifest">
-<link rel="stylesheet" href="assets/css/styles.css?v=9.0.0">
+<link rel="stylesheet" href="assets/css/styles.css?v=11.0.0">
 </head><body>
-<div class="utility">
-  <div class="container">
-    <div>Assalamu Alaikum & Welcome to Keffi Premier Academy</div>
-    <div class="utility-links"><a href="calendar.html">Calendar</a><a href="downloads.html">Downloads</a><a href="faq.html">FAQ</a><a href="portal.html">Portal</a></div>
-  </div>
-</div>
 <div class="announcement" aria-label="School announcements">
   <div class="container announcement-shell">
-    <span class="announcement-label"><span class="pulse-dot"></span> LIVE</span>
-    <div class="announcement-stage" aria-live="polite">
+    <div class="announcement-badge"><span class="live-dot"></span> LIVE</div>
+    <div class="announcement-stage">
       <a class="announcement-slide active" href="wellness.html"><span class="announcement-icon">✦</span><span><strong>Premier Wellness Club</strong> launches next term — explore the new student wellbeing framework.</span><span class="announcement-arrow">→</span></a>
       <a class="announcement-slide" href="admissions.html"><span class="announcement-icon">✎</span><span><strong>Admissions enquiries</strong> are open — begin your family's KPA journey.</span><span class="announcement-arrow">→</span></a>
-      <a class="announcement-slide" href="portal.html"><span class="announcement-icon">↗</span><span><strong>Student & Parent Portal:</strong> personalized access will be powered through SpeakOut.</span><span class="announcement-arrow">→</span></a>
-      <a class="announcement-slide" href="events.html"><span class="announcement-icon">◈</span><span><strong>Parent & Teacher workshops</strong> are being introduced as part of the whole-school wellbeing programme.</span><span class="announcement-arrow">→</span></a>
+      <a class="announcement-slide" href="portal.html"><span class="announcement-icon">↗</span><span><strong>SpeakOut Portal</strong> will connect students, parents, staff and school administration.</span><span class="announcement-arrow">→</span></a>
+      <a class="announcement-slide" href="events.html"><span class="announcement-icon">◇</span><span><strong>Parent & Teacher programmes</strong> are being integrated into the new wellbeing framework.</span><span class="announcement-arrow">→</span></a>
     </div>
-    <div class="announcement-controls" aria-label="Announcement controls">
+    <div class="announcement-controls">
       <button type="button" data-ann-prev aria-label="Previous announcement">‹</button>
       <button type="button" data-ann-pause aria-label="Pause announcements">Ⅱ</button>
       <button type="button" data-ann-next aria-label="Next announcement">›</button>
@@ -29,53 +23,64 @@
   <div class="announcement-progress"><span></span></div>
 </div>
 
+<!-- MOBILE APP HEADER -->
 <div class="mobile-app-header">
-  <a class="mobile-app-brand" href="index.html">
+  <a class="mobile-app-brand" href="index.html" aria-label="Keffi Premier Academy home">
     <img src="assets/images/kpa-logo.jpg" alt="Keffi Premier Academy logo">
-    <div class="mobile-app-brand-copy"><strong>Keffi Premier Academy</strong><span>Helping to Better Lives</span></div>
+    <div class="mobile-app-brand-copy">
+      <strong>Keffi Premier Academy</strong>
+      <span>Helping to Better Lives</span>
+    </div>
   </a>
   <div class="mobile-app-actions">
     <button class="mobile-app-icon" data-search aria-label="Search">⌕</button>
     <button class="mobile-app-icon" data-menu aria-label="Open menu">☰</button>
   </div>
 </div>
-<div class="nav-item"><button type="button">Learning ▾</button>
-        <div class="mega">
-          <a href="academics.html"><strong>Academics</strong><span>Curriculum and learning experience</span></a>
-          <a href="wellness.html"><strong>Premier Wellness Club</strong><span>Mental health, clubs and leadership</span></a>
-          <a href="events.html"><strong>Events</strong><span>Activities, workshops and school life</span></a>
-          <a href="calendar.html"><strong>School Calendar</strong><span>Important dates and programmes</span></a>
-        </div>
+
+<!-- DESKTOP / TABLET HEADER — DIRECT LINKS ONLY, NO DROPDOWNS -->
+<header class="site-header">
+  <div class="container navbar">
+    <a class="brand" href="index.html" aria-label="Keffi Premier Academy home">
+      <img src="assets/images/kpa-logo.jpg" alt="Keffi Premier Academy logo">
+      <div class="brand-copy">
+        <strong>Keffi Premier Academy</strong>
+        <span>Helping to Better Lives</span>
       </div>
-      <div class="nav-item"><button type="button">Community ▾</button>
-        <div class="mega">
-          <a href="news.html"><strong>News & Announcements</strong><span>Latest school updates</span></a>
-          <a href="gallery.html"><strong>Photo Gallery</strong><span>Moments from KPA</span></a>
-          <a href="downloads.html"><strong>Downloads</strong><span>Forms, prospectus and documents</span></a>
-          <a href="faq.html"><strong>FAQs</strong><span>Answers for families</span></a>
-        </div>
-      </div>
-      <a class="nav-item" href="admissions.html"><span style="display:block;padding:10px 9px;font-weight:750;font-size:.88rem">Admissions</span></a>
-      <a class="nav-item" href="contact.html"><span style="display:block;padding:10px 9px;font-weight:750;font-size:.88rem">Contact</span></a>
+    </a>
+
+    <nav class="main-nav clean-nav" aria-label="Main navigation">
+      <a href="about.html">Our School</a>
+      <a href="academics.html">Academics</a>
+      <a href="wellness.html">Wellness Club</a>
+      <a href="admissions.html">Admissions</a>
+      <a href="news.html">News</a>
+      <a href="contact.html">Contact</a>
     </nav>
+
     <div class="nav-actions">
       <button class="icon-btn search-trigger" data-search aria-label="Search website">⌕</button>
       <a class="btn btn-outline" href="portal.html">Portal</a>
       <a class="btn btn-primary" href="admissions.html">Enquire</a>
-      <button class="icon-btn menu-toggle" data-menu aria-label="Open menu">☰</button>
     </div>
   </div>
 </header>
 
+<!-- MOBILE DRAWER -->
 <div class="mobile-menu" aria-label="Mobile menu">
   <div class="mobile-drawer-top">
-    <div class="mobile-drawer-brand"><img src="assets/images/kpa-logo.jpg" alt=""><div><strong>Keffi Premier Academy</strong><div style="font-size:.72rem;color:#c9bee2">Explore the school</div></div></div>
+    <div class="mobile-drawer-brand">
+      <img src="assets/images/kpa-logo.jpg" alt="">
+      <div><strong>Keffi Premier Academy</strong><div style="font-size:.72rem;color:#c9bee2">Explore the school</div></div>
+    </div>
     <button class="mobile-close" data-menu aria-label="Close menu">×</button>
   </div>
+
   <div class="mobile-drawer-quick">
     <a href="portal.html"><span style="font-size:1.35rem">↗</span><span>Portal Access</span></a>
     <a href="admissions.html"><span style="font-size:1.35rem">✦</span><span>Admissions</span></a>
   </div>
+
   <div class="mobile-drawer-label">Discover</div>
   <div class="mobile-nav-grid">
     <a href="index.html"><span class="nav-emoji">⌂</span>Home</a>
@@ -87,6 +92,7 @@
     <a href="achievements.html"><span class="nav-emoji">★</span>Achievements</a>
     <a href="gallery.html"><span class="nav-emoji">▣</span>Gallery</a>
   </div>
+
   <div class="mobile-drawer-label">Stay Connected</div>
   <div class="mobile-nav-grid">
     <a href="news.html"><span class="nav-emoji">◫</span>News</a>
@@ -97,14 +103,20 @@
     <a href="contact.html"><span class="nav-emoji">✉</span>Contact</a>
   </div>
 </div>
+
+<!-- SEARCH -->
 <div class="search-modal" role="dialog" aria-modal="true" aria-label="Website search">
   <div class="search-box">
     <button class="search-close" data-search-close aria-label="Close search">×</button>
-    <div class="kicker">Search KPA</div><h3>What are you looking for?</h3>
-    <div class="search-row"><input id="siteSearch" type="search" placeholder="Try admissions, STEM, portal, calendar..." aria-label="Search"></div>
+    <div class="kicker">Search KPA</div>
+    <h3>What are you looking for?</h3>
+    <div class="search-row">
+      <input id="siteSearch" type="search" placeholder="Try admissions, STEM, portal, calendar..." aria-label="Search">
+    </div>
     <div class="search-results" id="searchResults"><div class="muted">Start typing to search the KPA website.</div></div>
   </div>
 </div>
+
 <main><section class="page-hero" style="background-image:linear-gradient(90deg,rgba(26,10,73,.95),rgba(26,10,73,.35)),url('assets/images/african-students-boys.jpg')"><div class="container"><div class="kicker" style="color:var(--gold2)">Academics</div><h1>Knowledge that becomes capability.</h1><p>A rigorous learning experience combining academic foundations, digital fluency, STEM, literacy and creativity.</p></div></section>
 <section class="section"><div class="container"><div class="kicker">Learning at KPA</div><h2>Rigorous. Relevant. Human.</h2><p class="lead">Replace curriculum placeholders with the School's approved academic information.</p><div class="page-grid" style="margin-top:28px">
 <div class="card"><span class="tag">Core</span><h3>Mathematics</h3><p>Numeracy, reasoning and problem-solving.</p></div><div class="card"><span class="tag">Core</span><h3>Sciences</h3><p>Inquiry, experimentation and scientific thinking.</p></div><div class="card"><span class="tag">Language</span><h3>English & Literacy</h3><p>Reading, writing, speaking and confident communication.</p></div><div class="card"><span class="tag">Technology</span><h3>ICT</h3><p>Digital literacy and responsible technology use.</p></div><div class="card"><span class="tag">Innovation</span><h3>STEM</h3><p>Applied science, technology, engineering and mathematics.</p></div><div class="card"><span class="tag">Whole Child</span><h3>Wellbeing & Leadership</h3><p>Personal development integrated with student life.</p></div>
@@ -161,5 +173,5 @@
   </div>
 </footer>
 <script>document.getElementById('year').textContent=new Date().getFullYear()</script>
-<script src="assets/js/main.js?v=9.0.0"></script>
+<script src="assets/js/main.js?v=11.0.0"></script>
 <script>if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js').catch(()=>{}));}</script></body></html>

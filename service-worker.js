@@ -1,5 +1,5 @@
 
-const CACHE='kpa-final-v9';
+const CACHE='kpa-final-v11';
 const ASSETS=[
  './','./index.html','./about.html','./academics.html','./admissions.html','./wellness.html',
  './leadership.html','./facilities.html','./news.html','./events.html','./gallery.html',
