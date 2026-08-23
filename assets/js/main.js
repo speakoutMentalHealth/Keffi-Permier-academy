@@ -118,24 +118,69 @@
 (() => {
   const $=(s,c=document)=>c.querySelector(s), $$=(s,c=document)=>[...c.querySelectorAll(s)];
 
-  // Announcement carousel: automatic, swipe-like vertical transitions, manual arrows, pause.
+  // Announcement carousel V12: slow-moving text + reliable auto rotation.
   const ann=$('.announcement'), annSlides=$$('.announcement-slide'), prev=$('[data-ann-prev]'), next=$('[data-ann-next]'), pause=$('[data-ann-pause]');
   if(ann && annSlides.length){
-    let ai=0, annTimer=null, paused=false;
+    let ai=Math.max(0,annSlides.findIndex(s=>s.classList.contains('active')));
+    let annTimer=null, paused=false;
+    const interval=9400;
+
     const progress=()=>$('.announcement-progress span');
-    const resetProgress=()=>{const p=progress(); if(!p)return; p.style.animation='none'; void p.offsetWidth; p.style.animation='announcementProgress 5.6s linear infinite'; if(paused)p.style.animationPlayState='paused'};
-    const show=i=>{
-      const old=annSlides[ai]; old.classList.remove('active'); old.classList.add('leaving');
-      ai=(i+annSlides.length)%annSlides.length;
-      const fresh=annSlides[ai]; fresh.classList.remove('leaving');
-      requestAnimationFrame(()=>fresh.classList.add('active'));
-      setTimeout(()=>old.classList.remove('leaving'),550); resetProgress();
+    const resetProgress=()=>{
+      const p=progress(); if(!p)return;
+      p.style.animation='none';
+      void p.offsetWidth;
+      p.style.animation=`kpaAnnouncementProgress ${interval}ms linear forwards`;
+      if(paused)p.style.animationPlayState='paused';
     };
-    const start=()=>{clearInterval(annTimer); if(!paused && !matchMedia('(prefers-reduced-motion: reduce)').matches)annTimer=setInterval(()=>show(ai+1),5600)};
+
+    const show=i=>{
+      const target=(i+annSlides.length)%annSlides.length;
+      annSlides.forEach((slide,n)=>{
+        slide.classList.remove('active','leaving');
+        if(n===target) slide.classList.add('active');
+      });
+      ai=target;
+      resetProgress();
+    };
+
+    const start=()=>{
+      clearInterval(annTimer);
+      if(!paused && !matchMedia('(prefers-reduced-motion: reduce)').matches){
+        annTimer=setInterval(()=>show(ai+1),interval);
+      }
+    };
+
     next?.addEventListener('click',()=>{show(ai+1);start()});
     prev?.addEventListener('click',()=>{show(ai-1);start()});
-    pause?.addEventListener('click',()=>{paused=!paused;ann.classList.toggle('paused',paused);pause.textContent=paused?'▶':'Ⅱ';pause.setAttribute('aria-label',paused?'Resume announcements':'Pause announcements');if(paused)clearInterval(annTimer);else start()});
-    ann.addEventListener('mouseenter',()=>{if(!paused)clearInterval(annTimer)});ann.addEventListener('mouseleave',()=>start());
+    pause?.addEventListener('click',()=>{
+      paused=!paused;
+      pause.textContent=paused?'▶':'Ⅱ';
+      pause.setAttribute('aria-label',paused?'Resume announcements':'Pause announcements');
+      if(paused){
+        clearInterval(annTimer);
+        const p=progress(); if(p)p.style.animationPlayState='paused';
+      }else{
+        const p=progress(); if(p)p.style.animationPlayState='running';
+        start();
+      }
+    });
+
+    // Do not stop the announcement simply because a touch pointer is over it.
+    if(matchMedia('(hover:hover) and (pointer:fine)').matches){
+      ann.addEventListener('mouseenter',()=>{if(!paused)clearInterval(annTimer)});
+      ann.addEventListener('mouseleave',()=>start());
+    }
+
+    // Swipe the announcement itself.
+    let ax=0;
+    ann.addEventListener('touchstart',e=>{ax=e.changedTouches[0].clientX},{passive:true});
+    ann.addEventListener('touchend',e=>{
+      const dx=e.changedTouches[0].clientX-ax;
+      if(Math.abs(dx)>45){show(ai+(dx<0?1:-1));start()}
+    },{passive:true});
+
+    show(ai);
     start();
   }
 
@@ -419,4 +464,89 @@
       a.setAttribute('aria-current','page');
     }
   });
+})();
+
+
+/* =========================================================
+   V12 MOBILE CAROUSEL ENHANCER
+   Adds visible swipe guidance + arrows without changing HTML.
+   ========================================================= */
+(() => {
+  const mobile=()=>matchMedia('(max-width:767px)').matches;
+
+  function enhanceCarousel(scroller){
+    if(!scroller || scroller.dataset.kpaEnhanced==='1') return;
+    if(!mobile()) return;
+
+    scroller.dataset.kpaEnhanced='1';
+
+    // Wrap only in JS DOM at runtime; source HTML stays untouched.
+    const shell=document.createElement('div');
+    shell.className='kpa-carousel-shell';
+    scroller.parentNode.insertBefore(shell,scroller);
+    shell.appendChild(scroller);
+
+    const toolbar=document.createElement('div');
+    toolbar.className='kpa-carousel-toolbar';
+    toolbar.innerHTML=`
+      <div class="kpa-carousel-hint">Swipe to explore</div>
+      <div class="kpa-carousel-buttons">
+        <button class="kpa-carousel-arrow kpa-prev" type="button" aria-label="Previous card">←</button>
+        <button class="kpa-carousel-arrow kpa-next" type="button" aria-label="Next card">→</button>
+      </div>`;
+    shell.insertBefore(toolbar,scroller);
+
+    const progress=document.createElement('div');
+    progress.className='kpa-carousel-progress';
+    progress.innerHTML='<span></span>';
+    shell.appendChild(progress);
+
+    const prev=toolbar.querySelector('.kpa-prev');
+    const next=toolbar.querySelector('.kpa-next');
+    const bar=progress.querySelector('span');
+
+    const step=()=>{
+      const first=scroller.firstElementChild;
+      if(!first)return Math.max(240,scroller.clientWidth*.72);
+      const gap=parseFloat(getComputedStyle(scroller).gap)||12;
+      return first.getBoundingClientRect().width+gap;
+    };
+
+    const update=()=>{
+      const max=Math.max(1,scroller.scrollWidth-scroller.clientWidth);
+      const ratio=Math.max(0,Math.min(1,scroller.scrollLeft/max));
+      bar.style.width=(22+ratio*78)+'%';
+      prev.disabled=scroller.scrollLeft<6;
+      next.disabled=scroller.scrollLeft>max-6;
+    };
+
+    prev.addEventListener('click',()=>scroller.scrollBy({left:-step(),behavior:'smooth'}));
+    next.addEventListener('click',()=>scroller.scrollBy({left:step(),behavior:'smooth'}));
+    scroller.addEventListener('scroll',update,{passive:true});
+
+    // A gentle one-time nudge teaches swipe affordance without hijacking interaction.
+    if(scroller.scrollWidth>scroller.clientWidth+20 && !matchMedia('(prefers-reduced-motion: reduce)').matches){
+      setTimeout(()=>{
+        if(scroller.scrollLeft<2){
+          scroller.scrollTo({left:22,behavior:'smooth'});
+          setTimeout(()=>scroller.scrollTo({left:0,behavior:'smooth'}),700);
+        }
+      },900);
+    }
+
+    requestAnimationFrame(update);
+  }
+
+  function init(){
+    if(!mobile())return;
+    document.querySelectorAll('.page-grid,.values-grid').forEach(scroller=>{
+      // only enhance actual horizontally overflowing groups
+      requestAnimationFrame(()=>{
+        if(scroller.children.length>1)enhanceCarousel(scroller);
+      });
+    });
+  }
+
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);
+  else init();
 })();
