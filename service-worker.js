@@ -1,4 +1,4 @@
-const CACHE='kpa-v14-production';
+const CACHE='kpa-v15-compass';
 const STATIC=[
  './assets/css/styles.css','./assets/js/main.js','./assets/images/kpa-logo.jpg',
  './assets/svg/living-crest.svg','./assets/svg/kpa-geometry.svg'
