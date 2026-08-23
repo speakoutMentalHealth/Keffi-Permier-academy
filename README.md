@@ -1,63 +1,44 @@
-# Keffi Premier Academy — SIGNATURE V8
+# Keffi Premier Academy — FINAL V9
 
-This version is a signature redesign intended to move beyond the conventional "premium school template" look.
+Final responsive release.
 
-## Design research translated into the build
-Current high-performing private/international school websites consistently combine:
-- distinctive identity rather than generic school templates
-- story-driven homepage progression
-- immersive visuals and selective motion
-- intuitive mobile-first navigation
-- clear admissions journeys
-- audience-specific access
-- filterable / interactive content
-- useful digital service moments
+## Final corrections completed
+- Removed the "KPA in your pocket" banner completely.
+- Enforced exactly one desktop navigation system and one mobile navigation system.
+- Desktop navigation is fully hidden on phone widths.
+- Mobile app header is fully hidden on tablet/desktop widths.
+- Removed legacy mobile dock/navigation remnants.
+- Fixed mobile hero spacing so the fixed bottom dock does not obscure hero copy or CTAs.
+- Removed floating accessibility control from the phone canvas; desktop accessibility remains.
+- Kept the KPA concierge compact and above the mobile dock.
+- Added safe-area handling for iPhone notches / Dynamic Island and modern Android devices.
+- Added narrow-phone and large-phone refinements.
+- Tightened mobile typography and spacing.
+- Kept continuous announcement movement on mobile.
+- Updated service-worker cache to `kpa-final-v9`.
+- Added CSS/JS cache-busting query strings (`v=9.0.0`) to prevent GitHub Pages from serving stale V8 assets.
 
-V8 turns those principles into bespoke KPA components rather than copying any school.
+## Breakpoints
+- 320–767px: app-style phone experience
+- 768–1023px: tablet / hybrid website
+- 1024px+: full premium website
+- 1440px+: enhanced large-desktop layout
 
-## V8 signature experiences
-- Living Crest hero composition
-- "This is Premier" sticky brand manifesto
-- animated proof/fact strip
-- interactive **Premier Compass**
-- interactive **A Day at KPA** timeline
-- audience-personalized **Your KPA** switcher
-- KPA Digital Concierge with accurate preset navigation
-- Premier Wellness story
-- safe student Discovery Lab
-- tactile desktop tilt and button microinteractions
-- dedicated mobile-app experience inherited and refined from V7
-- PWA public shell and service worker
+## Architecture
+Public KPA website → SpeakOut Portal → Keffi Premier Academy workspace.
 
-## Mobile
-320–767px is deliberately treated as an app experience rather than a compressed website:
-- app header
-- full-screen drawer
-- bottom navigation
-- safe-area handling
-- swipeable content
-- app-style page banners
-- touch-first interactions
-- phone-sized forms
-- reduced clutter
-- concierge adapted to mobile
-
-## Security architecture
-Public KPA website → SpeakOut Portal → KPA institutional workspace.
-
-Never store student, parent, health, password or privileged admin data in this GitHub Pages frontend.
+No student, parent, wellbeing, password, or privileged admin data should be stored in this GitHub Pages frontend.
 
 ## Before production
-Replace:
-- demonstration student photographs with authentic KPA photography
-- school history / leadership placeholders
-- curriculum details
-- official address / phone / email / WhatsApp
+Replace all placeholders for:
+- authentic KPA photography
+- leadership/staff names and photos
+- school history/vision/mission
+- curriculum information
+- admissions requirements
+- official address/phone/email/WhatsApp
 - social links
+- Google Maps
 - downloadable files
-- actual event dates
-- actual SpeakOut URLs
-- authentic student / parent / teacher testimonials
-
-## GitHub Pages
-Upload all contents to the repository root and deploy from `main / root`.
+- event dates
+- SpeakOut production URLs
