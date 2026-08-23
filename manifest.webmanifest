@@ -3,7 +3,13 @@
   "short_name": "KPA",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#fbf8f2",
+  "background_color": "#f6f3fb",
   "theme_color": "#2b146e",
-  "icons": []
+  "icons": [],
+  "description": "Keffi Premier Academy mobile web experience",
+  "scope": "./",
+  "orientation": "any",
+  "categories": [
+    "education"
+  ]
 }

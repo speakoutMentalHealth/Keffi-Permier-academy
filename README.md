@@ -1,3 +1,36 @@
+# Keffi Premier Academy — ELITE V7 Dual Experience
+
+## Core concept
+One codebase, two deliberately different experiences:
+
+- **Desktop / laptop (1024px+)** → premium institutional website
+- **Tablet (768–1023px)** → responsive hybrid experience
+- **Mobile (320–767px)** → app-like PWA experience
+
+## Mobile app-style features
+- Dedicated mobile app header
+- App-style full-screen drawer
+- Persistent bottom navigation dock
+- Safe-area support for iPhone notches / Dynamic Island and modern Android devices
+- Swipeable horizontal cards
+- Swipe-enabled hero slider
+- App-style interior page banners
+- Touch-first cards and controls
+- Mobile-specific typography and spacing
+- Phone-optimized forms with 16px inputs to avoid iOS zoom
+- PWA manifest + service worker for public shell/assets
+- Home-screen-install-ready structure
+- Landscape phone layout support
+- Narrow-device support down to ~320px
+- Reduced-motion support
+- No horizontal page overflow
+
+## Desktop
+Desktop intentionally remains a premium school website with full navigation, large visual storytelling, hover states and institutional content architecture.
+
+## Security
+The service worker caches only public website files. Authentication, student data, parent records, wellbeing records and administration remain in the SpeakOut Portal and must never be stored in this GitHub Pages frontend.
+
 # Keffi Premier Academy — ELITE V5 Interactive Frontend
 
 A premium, mobile-first static frontend designed for GitHub Pages.
@@ -126,15 +159,13 @@ Search `portal.html` for:
 - `manifest.webmanifest`
 
 
-## V6 interaction upgrades
-- True rotating announcement carousel with previous/next controls and auto-rotation
-- Gamified premium buttons with shine, depth, press feedback and icon animation
-- "Choose Your Premier Quest" interactive student cards
-- "Choose Your Adventure" interactive pathway selector
-- Safe celebratory confetti for completing the mini learning challenge
-- Discovery badge unlock feedback (session-only, no tracking)
-- Curiosity Door micro-learning interaction
-- Desktop pointer tilt effects on quest cards
-- Richer hover/tap elevation across cards
-- Animated announcement background and live indicator
-- No streaks, loot boxes, infinite-scroll traps, hidden tracking, or manipulative engagement mechanics
+## ELITE V6 Interaction Upgrade
+- Auto-rotating announcement carousel with manual previous/next and pause
+- Premium tactile/game-inspired buttons with press states and micro-spark feedback
+- Completely redesigned app-style mobile navigation
+- Mobile bottom dock for Home, Learning, Wellness and Portal
+- Choose Your KPA Adventure interactive student pathway selector
+- Improved mobile hero sizing, typography and tap targets
+- Mobile announcement text is clamped to two lines and cycles automatically
+- Floating actions are replaced by the cleaner bottom dock on small screens
+- Existing safe Student Discovery Lab remains intentionally non-addictive: no streaks or hidden tracking
