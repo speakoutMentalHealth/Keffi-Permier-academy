@@ -1,38 +1,27 @@
-# Keffi Premier Academy — Premium Website v3
+# Keffi Premier Academy Website — V4
 
-## Design direction
-Built from patterns repeatedly seen across current award-winning independent and international school websites:
-- immersive hero imagery
-- elegant editorial typography
-- distinctive institutional branding
-- persistent admissions CTA
-- mobile-first navigation
-- student-experience storytelling
-- fast facts
-- audience-specific portal access
-- restrained motion and scroll reveals
-- clear admissions journey
+Premium Nigerian Muslim school concept built around the supplied KPA logo and the existing purple identity.
 
 ## Architecture
-KPA public website → SpeakOut Portal → Keffi Premier Academy institutional workspace.
+Public KPA website → SpeakOut Portal → KPA school workspace.
 
-## Critical setup before launch
-Replace:
-- placeholder KPA crest
-- remote demonstration imagery with authentic KPA photography
-- school history, vision, mission and leadership copy
-- curriculum and admissions information
-- address, phone, email and WhatsApp
-- actual SpeakOut portal URLs
+## Included
+- Homepage
+- Our School
+- Learning
+- Premier Wellness Club / Student Experience
+- Admissions
+- Contact
+- Portal Gateway
+- Fully responsive mobile navigation
+- Local image assets
 
-## SpeakOut routes to replace in portal.html
-- https://YOUR-SPEAKOUT-PORTAL/signup?role=student
-- https://YOUR-SPEAKOUT-PORTAL/signup?role=parent
-- https://YOUR-SPEAKOUT-PORTAL/signup?role=staff
-- https://YOUR-SPEAKOUT-PORTAL/login
+## Important before launch
+Replace demonstration Pexels imagery with authentic Keffi Premier Academy photography as soon as available. The included images are free-stock visual placeholders selected to better reflect African/Muslim student representation.
+
+Replace the portal placeholder URLs in `portal.html` with the actual SpeakOut routes.
+
+Replace school history, vision, mission, contact details, curriculum and admissions requirements with approved information from the school.
 
 ## GitHub Pages
-Upload the project to a GitHub repository, then enable Pages from main / root.
-
-## Security
-Do not store student, parent, health, password or administrative data in this GitHub Pages frontend. Secure data remains in the SpeakOut Portal.
+Upload all files to the repository root and enable Pages from `main` / root.
