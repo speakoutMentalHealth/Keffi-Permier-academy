@@ -118,70 +118,22 @@
 (() => {
   const $=(s,c=document)=>c.querySelector(s), $$=(s,c=document)=>[...c.querySelectorAll(s)];
 
-  // Announcement carousel V12: slow-moving text + reliable auto rotation.
-  const ann=$('.announcement'), annSlides=$$('.announcement-slide'), prev=$('[data-ann-prev]'), next=$('[data-ann-next]'), pause=$('[data-ann-pause]');
-  if(ann && annSlides.length){
-    let ai=Math.max(0,annSlides.findIndex(s=>s.classList.contains('active')));
-    let annTimer=null, paused=false;
+  // Announcement carousel V14: CMS-aware, slow-moving, swipeable and reliable.
+  const ann=$('.announcement'), prev=$('[data-ann-prev]'), next=$('[data-ann-next]'), pause=$('[data-ann-pause]');
+  if(ann){
+    let ai=0,annTimer=null,paused=false;
     const interval=9400;
-
+    const slides=()=>$$('.announcement-slide').filter(s=>getComputedStyle(s).display!=='none');
     const progress=()=>$('.announcement-progress span');
-    const resetProgress=()=>{
-      const p=progress(); if(!p)return;
-      p.style.animation='none';
-      void p.offsetWidth;
-      p.style.animation=`kpaAnnouncementProgress ${interval}ms linear forwards`;
-      if(paused)p.style.animationPlayState='paused';
-    };
-
-    const show=i=>{
-      const target=(i+annSlides.length)%annSlides.length;
-      annSlides.forEach((slide,n)=>{
-        slide.classList.remove('active','leaving');
-        if(n===target) slide.classList.add('active');
-      });
-      ai=target;
-      resetProgress();
-    };
-
-    const start=()=>{
-      clearInterval(annTimer);
-      if(!paused && !matchMedia('(prefers-reduced-motion: reduce)').matches){
-        annTimer=setInterval(()=>show(ai+1),interval);
-      }
-    };
-
-    next?.addEventListener('click',()=>{show(ai+1);start()});
-    prev?.addEventListener('click',()=>{show(ai-1);start()});
-    pause?.addEventListener('click',()=>{
-      paused=!paused;
-      pause.textContent=paused?'▶':'Ⅱ';
-      pause.setAttribute('aria-label',paused?'Resume announcements':'Pause announcements');
-      if(paused){
-        clearInterval(annTimer);
-        const p=progress(); if(p)p.style.animationPlayState='paused';
-      }else{
-        const p=progress(); if(p)p.style.animationPlayState='running';
-        start();
-      }
-    });
-
-    // Do not stop the announcement simply because a touch pointer is over it.
-    if(matchMedia('(hover:hover) and (pointer:fine)').matches){
-      ann.addEventListener('mouseenter',()=>{if(!paused)clearInterval(annTimer)});
-      ann.addEventListener('mouseleave',()=>start());
-    }
-
-    // Swipe the announcement itself.
-    let ax=0;
-    ann.addEventListener('touchstart',e=>{ax=e.changedTouches[0].clientX},{passive:true});
-    ann.addEventListener('touchend',e=>{
-      const dx=e.changedTouches[0].clientX-ax;
-      if(Math.abs(dx)>45){show(ai+(dx<0?1:-1));start()}
-    },{passive:true});
-
-    show(ai);
-    start();
+    const resetProgress=()=>{const p=progress();if(!p)return;p.style.animation='none';void p.offsetWidth;p.style.animation=`kpaAnnouncementProgress ${interval}ms linear forwards`;if(paused)p.style.animationPlayState='paused'};
+    const show=i=>{const list=slides();if(!list.length)return;ai=(i+list.length)%list.length;$$('.announcement-slide').forEach(s=>s.classList.remove('active','leaving'));list[ai].classList.add('active');resetProgress()};
+    const start=()=>{clearInterval(annTimer);if(!paused&&!matchMedia('(prefers-reduced-motion: reduce)').matches&&slides().length>1)annTimer=setInterval(()=>show(ai+1),interval)};
+    next?.addEventListener('click',()=>{show(ai+1);start()});prev?.addEventListener('click',()=>{show(ai-1);start()});
+    pause?.addEventListener('click',()=>{paused=!paused;pause.textContent=paused?'▶':'Ⅱ';pause.setAttribute('aria-label',paused?'Resume announcements':'Pause announcements');if(paused){clearInterval(annTimer);const p=progress();if(p)p.style.animationPlayState='paused'}else{const p=progress();if(p)p.style.animationPlayState='running';start()}});
+    if(matchMedia('(hover:hover) and (pointer:fine)').matches){ann.addEventListener('mouseenter',()=>{if(!paused)clearInterval(annTimer)});ann.addEventListener('mouseleave',start)}
+    let ax=0;ann.addEventListener('touchstart',e=>{ax=e.changedTouches[0].clientX},{passive:true});ann.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-ax;if(Math.abs(dx)>45){show(ai+(dx<0?1:-1));start()}},{passive:true});
+    document.addEventListener('kpa:announcements-updated',()=>{ai=0;show(0);start()});
+    show(0);start();
   }
 
   // Adventure selector: changes the left console instantly on tap/click.
