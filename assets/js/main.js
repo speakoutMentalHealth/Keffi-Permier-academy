@@ -229,3 +229,123 @@
     document.body.animate([{opacity:.75},{opacity:1}],{duration:220,easing:'ease-out'});
   }
 })();
+
+
+/* =========================================================
+   V8 SIGNATURE INTERACTIONS
+   ========================================================= */
+(() => {
+  const $=(s,c=document)=>c.querySelector(s), $$=(s,c=document)=>[...c.querySelectorAll(s)];
+
+  /* scroll-aware header */
+  const header=$('.site-header');
+  const onScroll=()=>header?.classList.toggle('scrolled',window.scrollY>60);
+  onScroll(); addEventListener('scroll',onScroll,{passive:true});
+
+  /* Premier Compass */
+  const compassStory=$('#compassStory');
+  const compassData={
+    knowledge:{
+      label:'Knowledge',
+      title:'Curiosity becomes capability.',
+      text:'Academic foundations, literacy, numeracy, science, ICT and STEM help students build the confidence to understand, question and solve.',
+      link:'academics.html'
+    },
+    character:{
+      label:'Character',
+      title:'Values become daily habits.',
+      text:'Integrity, responsibility, respect, compassion and faith-aware character are reinforced through school culture, relationships and leadership.',
+      link:'about.html'
+    },
+    wellbeing:{
+      label:'Wellbeing',
+      title:'Belonging strengthens learning.',
+      text:'The Premier Wellness framework connects mental health, clubs, trusted adults, parents, teachers and digital resources around the whole child.',
+      link:'wellness.html'
+    },
+    leadership:{
+      label:'Leadership',
+      title:'Student voice becomes contribution.',
+      text:'Mentoring, service, teamwork and responsibility create repeated opportunities for students to practise confidence and purposeful leadership.',
+      link:'wellness.html'
+    }
+  };
+  $$('.compass-node').forEach(btn=>btn.addEventListener('click',()=>{
+    $$('.compass-node').forEach(b=>b.classList.remove('active'));btn.classList.add('active');
+    const d=compassData[btn.dataset.compass];
+    if(compassStory&&d){
+      compassStory.innerHTML=`<div class="kicker" style="color:#efd58c">${d.label}</div><h3>${d.title}</h3><p>${d.text}</p><a class="btn btn-gold" href="${d.link}">Explore ${d.label} →</a>`;
+    }
+  }));
+
+  /* A day at KPA */
+  const dayStage=$('#dayStage'),dayImage=$('#dayImage'),dayTime=$('#dayClock'),dayTitle=$('#dayTitle'),dayText=$('#dayText'),dayProgress=$('#dayProgress');
+  const dayData={
+    arrival:['07:30','Arrival & Welcome','Students enter a calm, values-led environment and begin the day with connection, preparation and purpose.','assets/images/muslim-students-girls.jpg',20],
+    learn:['09:15','Deep Learning','Core academics, science, literacy and problem-solving build strong knowledge foundations.','assets/images/african-students-boys.jpg',40],
+    create:['12:30','Create & Explore','ICT, STEM, literacy, culture and drama give students practical ways to discover strengths.','assets/images/muslim-students-girls.jpg',60],
+    belong:['14:00','Clubs & Belonging','Premier Wellness Club activities create structured opportunities for connection, mentoring and positive participation.','assets/images/african-students-boys.jpg',80],
+    reflect:['15:30','Reflect & Grow','Students leave with more than completed lessons: they carry new knowledge, stronger confidence and a clearer sense of responsibility.','assets/images/muslim-students-girls.jpg',100]
+  };
+  $$('[data-day]').forEach(btn=>btn.addEventListener('click',()=>{
+    $$('[data-day]').forEach(b=>b.classList.remove('active'));btn.classList.add('active');
+    const d=dayData[btn.dataset.day];if(!d)return;
+    if(dayImage){dayImage.style.opacity='.35';setTimeout(()=>{dayImage.src=d[3];dayImage.style.opacity='1'},130)}
+    if(dayTime)dayTime.textContent=d[0];if(dayTitle)dayTitle.textContent=d[1];if(dayText)dayText.textContent=d[2];
+    if(dayProgress)dayProgress.style.width=d[4]+'%';
+  }));
+
+  /* Audience path selector */
+  $$('[data-audience]').forEach(btn=>btn.addEventListener('click',()=>{
+    const section=btn.closest('.audience-section');if(!section)return;
+    $$('[data-audience]',section).forEach(b=>b.classList.remove('active'));btn.classList.add('active');
+    $$('[data-audience-panel]',section).forEach(p=>p.classList.toggle('active',p.dataset.audiencePanel===btn.dataset.audience));
+  }));
+
+  /* KPA concierge */
+  const launcher=$('.kpa-concierge-launcher'),panel=$('.kpa-concierge'),close=$('.concierge-close'),answer=$('.concierge-answer');
+  launcher?.addEventListener('click',()=>panel?.classList.toggle('open'));
+  close?.addEventListener('click',()=>panel?.classList.remove('open'));
+  const answers={
+    admissions:['Admissions','Start with the Admissions page to understand the journey, submit an enquiry and arrange a visit.','admissions.html'],
+    portal:['Portal access','Students, parents, staff and administrators continue into the secure SpeakOut Portal. New users link to KPA using the School’s unique code.','portal.html'],
+    wellness:['Premier Wellness Club','The Wellness Club is the umbrella framework for student mental health, leadership and existing clubs including ICT, STEM, Literacy, Culture & Drama and Muslim Students Club.','wellness.html'],
+    calendar:['School calendar','Use the School Calendar for important dates, programmes, workshops and events.','calendar.html'],
+    contact:['Contact KPA','Use the Contact page for WhatsApp, telephone, email, enquiries and map information once official school details are added.','contact.html']
+  };
+  $$('.concierge-chip').forEach(chip=>chip.addEventListener('click',()=>{
+    const d=answers[chip.dataset.ask];if(answer&&d){
+      answer.innerHTML=`<strong>${d[0]}</strong><p>${d[1]}</p><a href="${d[2]}">Go there →</a>`;
+      answer.classList.add('show');
+    }
+  }));
+
+  /* Count-up facts, once */
+  const counters=$$('[data-count]');
+  if(counters.length && 'IntersectionObserver' in window){
+    const io=new IntersectionObserver(entries=>entries.forEach(entry=>{
+      if(!entry.isIntersecting)return;
+      const el=entry.target,end=Number(el.dataset.count||0),suffix=el.dataset.suffix||'';
+      const start=performance.now(),duration=900;
+      const tick=now=>{
+        const p=Math.min(1,(now-start)/duration);
+        const eased=1-Math.pow(1-p,3);
+        el.textContent=Math.round(end*eased)+suffix;
+        if(p<1)requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);io.unobserve(el);
+    }),{threshold:.5});
+    counters.forEach(el=>io.observe(el));
+  }
+
+  /* Subtle pointer tilt, desktop only */
+  if(matchMedia('(hover:hover) and (pointer:fine)').matches){
+    $$('[data-tilt]').forEach(card=>{
+      card.addEventListener('pointermove',e=>{
+        const r=card.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+        card.style.transform=`perspective(800px) rotateX(${(-y*5).toFixed(2)}deg) rotateY(${(x*6).toFixed(2)}deg) translateY(-3px)`;
+      });
+      card.addEventListener('pointerleave',()=>card.style.transform='');
+    });
+  }
+})();
