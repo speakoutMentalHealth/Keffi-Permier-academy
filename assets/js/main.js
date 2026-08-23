@@ -110,78 +110,122 @@
   $('[data-text-size]')?.addEventListener('click',()=>document.body.classList.toggle('large-text'));
   $('[data-contrast]')?.addEventListener('click',()=>document.body.classList.toggle('high-contrast'));
   $('[data-motion]')?.addEventListener('click',()=>document.body.classList.toggle('reduce-motion'));
+})();
 
-  // V6 announcement carousel
-  const annItems=$$('.announcement-item'),annDots=$$('.announcement-dot');
-  if(annItems.length){
-    let ai=0,atimer;
-    const announce=i=>{
-      ai=(i+annItems.length)%annItems.length;
-      annItems.forEach((x,n)=>x.classList.toggle('active',n===ai));
-      annDots.forEach((x,n)=>x.classList.toggle('active',n===ai));
+/* =========================================================
+   ELITE V6 — IMMERSIVE INTERACTIONS
+   ========================================================= */
+(() => {
+  const $=(s,c=document)=>c.querySelector(s), $$=(s,c=document)=>[...c.querySelectorAll(s)];
+
+  // Announcement carousel: automatic, swipe-like vertical transitions, manual arrows, pause.
+  const ann=$('.announcement'), annSlides=$$('.announcement-slide'), prev=$('[data-ann-prev]'), next=$('[data-ann-next]'), pause=$('[data-ann-pause]');
+  if(ann && annSlides.length){
+    let ai=0, annTimer=null, paused=false;
+    const progress=()=>$('.announcement-progress span');
+    const resetProgress=()=>{const p=progress(); if(!p)return; p.style.animation='none'; void p.offsetWidth; p.style.animation='announcementProgress 5.6s linear infinite'; if(paused)p.style.animationPlayState='paused'};
+    const show=i=>{
+      const old=annSlides[ai]; old.classList.remove('active'); old.classList.add('leaving');
+      ai=(i+annSlides.length)%annSlides.length;
+      const fresh=annSlides[ai]; fresh.classList.remove('leaving');
+      requestAnimationFrame(()=>fresh.classList.add('active'));
+      setTimeout(()=>old.classList.remove('leaving'),550); resetProgress();
     };
-    const restartAnn=()=>{
-      clearInterval(atimer);
-      if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
-        atimer=setInterval(()=>announce(ai+1),4800);
-      }
-    };
-    $('[data-ann-prev]')?.addEventListener('click',()=>{announce(ai-1);restartAnn()});
-    $('[data-ann-next]')?.addEventListener('click',()=>{announce(ai+1);restartAnn()});
-    annDots.forEach((d,i)=>d.addEventListener('click',()=>{announce(i);restartAnn()}));
-    restartAnn();
+    const start=()=>{clearInterval(annTimer); if(!paused && !matchMedia('(prefers-reduced-motion: reduce)').matches)annTimer=setInterval(()=>show(ai+1),5600)};
+    next?.addEventListener('click',()=>{show(ai+1);start()});
+    prev?.addEventListener('click',()=>{show(ai-1);start()});
+    pause?.addEventListener('click',()=>{paused=!paused;ann.classList.toggle('paused',paused);pause.textContent=paused?'▶':'Ⅱ';pause.setAttribute('aria-label',paused?'Resume announcements':'Pause announcements');if(paused)clearInterval(annTimer);else start()});
+    ann.addEventListener('mouseenter',()=>{if(!paused)clearInterval(annTimer)});ann.addEventListener('mouseleave',()=>start());
+    start();
   }
 
-  // V6 adventure map
+  // Adventure selector: changes the left console instantly on tap/click.
   const adventureData={
-    learn:['Start with learning.','Explore lessons, literacy, science and the skills that turn curiosity into confidence.'],
-    build:['Turn ideas into things.','Use ICT, STEM and practical projects to test, build and improve your ideas.'],
-    connect:['Find your people.','Clubs, teamwork, culture, friendship and wellbeing activities create places to belong.'],
-    lead:['Use your voice well.','Leadership, service and mentoring help students practise responsibility and positive influence.']
+    scientist:{icon:'🔬',title:'Future Scientist',text:'Follow curiosity through science and STEM: ask better questions, test ideas, work with others and learn from what does not work.',progress:'42%'},
+    creator:{icon:'🎭',title:'Creative Voice',text:'Build confidence through literacy, culture and drama: read deeply, communicate clearly, perform boldly and tell meaningful stories.',progress:'58%'},
+    digital:{icon:'💻',title:'Digital Builder',text:'Use ICT as a creative tool: understand technology, solve practical problems and practise responsible digital citizenship.',progress:'74%'},
+    leader:{icon:'🌱',title:'Purposeful Leader',text:'Grow through service, teamwork and reflection: practise responsibility, care for others and learn how to lead with character.',progress:'90%'}
   };
-  $$('[data-adventure-step]').forEach(b=>b.addEventListener('click',()=>{
-    $$('[data-adventure-step]').forEach(x=>x.classList.remove('active'));b.classList.add('active');
-    const d=adventureData[b.dataset.adventureStep],box=$('#adventureDetail');
-    if(box&&d){box.innerHTML=`<h3>${d[0]}</h3><p>${d[1]}</p>`;box.animate([{opacity:.35,transform:'translateY(6px)'},{opacity:1,transform:'none'}],{duration:260,easing:'ease-out'})}
+  const display=$('#adventureDisplay'), bar=$('#adventureProgress');
+  $$('.adventure-card').forEach(card=>card.addEventListener('click',()=>{
+    $$('.adventure-card').forEach(c=>c.classList.remove('active'));card.classList.add('active');
+    const d=adventureData[card.dataset.adventureKey]; if(!d||!display)return;
+    display.innerHTML=`<div class="adventure-icon">${d.icon}</div><h3>${d.title}</h3><p>${d.text}</p><div class="adventure-progress"><span id="adventureProgress" style="width:${d.progress}"></span></div>`;
+    burst(card);
   }));
 
-  // V6 curiosity door
-  $('#curiosityBtn')?.addEventListener('click',()=>{
-    const box=$('#curiosityBox');box?.classList.toggle('open');
-    const btn=$('#curiosityBtn');if(btn)btn.textContent=box?.classList.contains('open')?'Close the door':'Open the door';
+  // Small tactile sparkle on selected high-value controls. Decorative only; never persistent or randomized rewards.
+  function burst(origin){
+    if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+    const r=origin.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2;
+    [[-34,-28],[32,-24],[-30,26],[35,28],[0,-38]].forEach(([dx,dy],i)=>{
+      const s=document.createElement('i');s.className='tap-spark';s.style.left=(cx-5)+'px';s.style.top=(cy-5)+'px';s.style.setProperty('--dx',dx+'px');s.style.setProperty('--dy',dy+'px');s.style.background=i%2?'#6b49bf':'#d8b766';document.body.appendChild(s);setTimeout(()=>s.remove(),650)
+    });
+  }
+  $$('.btn-primary,.btn-gold,.tab-btn,.orbit-node').forEach(el=>el.addEventListener('click',()=>burst(el)));
+
+  // Search from the mobile menu should close the menu first so the search modal is visible.
+  $$('.mobile-menu [data-search]').forEach(b=>b.addEventListener('click',()=>{document.querySelector('.mobile-menu')?.classList.remove('open');document.body.classList.remove('no-scroll')}));
+})();
+
+
+/* V7 MOBILE APP EXPERIENCE */
+(() => {
+  const isPhone=()=>window.matchMedia('(max-width: 767px)').matches;
+
+  // Active dock item
+  const file=(location.pathname.split('/').pop()||'index.html').replace('.html','');
+  document.querySelectorAll('[data-dock]').forEach(a=>{
+    a.classList.toggle('active',a.dataset.dock===file);
   });
 
-  // V6 safe celebration feedback
-  function celebrate(origin){
-    if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-    const layer=document.createElement('div');layer.className='celebration-layer';document.body.appendChild(layer);
-    const colors=['#d8b766','#6b49bf','#2f6d58','#25788a','#f1da95'];
-    const rect=origin?.getBoundingClientRect?.()||{left:innerWidth/2,top:innerHeight/2,width:0,height:0};
-    for(let i=0;i<22;i++){
-      const c=document.createElement('span');c.className='confetti';c.style.background=colors[i%colors.length];
-      c.style.left=(rect.left+rect.width/2)+'px';c.style.top=(rect.top+rect.height/2)+'px';
-      c.style.setProperty('--dx',((Math.random()-.5)*280)+'px');c.style.setProperty('--dy',(80+Math.random()*220)+'px');
-      c.style.animationDelay=(Math.random()*.12)+'s';layer.appendChild(c)
-    }
-    setTimeout(()=>layer.remove(),1500)
-  }
-  const qz=$('#studentQuiz');
-  if(qz){
-    $$('.choice',qz).forEach(c=>c.addEventListener('click',()=>{
-      if(c.dataset.correct==='true'){
-        $('#badgeExplorer')?.classList.add('unlocked');celebrate(c);
+  // Close app drawer when a navigation item is selected
+  document.querySelectorAll('.mobile-menu a').forEach(a=>a.addEventListener('click',()=>{
+    document.querySelector('.mobile-menu')?.classList.remove('open');
+    document.body.classList.remove('no-scroll');
+  }));
+
+  // Swipe hero manually on phones
+  const hero=document.querySelector('.hero');
+  const dots=[...document.querySelectorAll('.hero-dot')];
+  if(hero && dots.length){
+    let sx=0,sy=0;
+    hero.addEventListener('touchstart',e=>{
+      const t=e.changedTouches[0]; sx=t.clientX; sy=t.clientY;
+    },{passive:true});
+    hero.addEventListener('touchend',e=>{
+      if(!isPhone())return;
+      const t=e.changedTouches[0],dx=t.clientX-sx,dy=t.clientY-sy;
+      if(Math.abs(dx)>55 && Math.abs(dx)>Math.abs(dy)){
+        const active=dots.findIndex(d=>d.classList.contains('active'));
+        const next=dx<0?Math.min(dots.length-1,active+1):Math.max(0,active-1);
+        dots[next]?.click();
       }
-    }));
+    },{passive:true});
   }
 
-  // V6 subtle tilt on desktop pointer devices
-  if(matchMedia('(hover:hover) and (pointer:fine)').matches && !matchMedia('(prefers-reduced-motion: reduce)').matches){
-    $$('[data-tilt]').forEach(card=>{
-      card.addEventListener('pointermove',e=>{
-        const r=card.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
-        card.style.transform=`perspective(800px) rotateX(${(-y*4).toFixed(2)}deg) rotateY(${(x*5).toFixed(2)}deg) translateY(-6px)`;
-      });
-      card.addEventListener('pointerleave',()=>card.style.transform='');
+  // horizontal swipe hint only once per load
+  document.querySelectorAll('.values-grid,.page-grid').forEach(scroller=>{
+    if(!isPhone())return;
+    scroller.setAttribute('aria-label',(scroller.getAttribute('aria-label')||'Swipe horizontally to explore'));
+  });
+
+  // Make mobile cards tappable when they contain one link
+  if(isPhone()){
+    document.querySelectorAll('.card,.value-card,.event-card').forEach(card=>{
+      const links=card.querySelectorAll('a[href]');
+      if(links.length===1){
+        card.style.cursor='pointer';
+        card.addEventListener('click',e=>{
+          if(e.target.closest('a,button,input,select,textarea'))return;
+          links[0].click();
+        });
+      }
     });
+  }
+
+  // App-like page fade, reduced-motion safe
+  if(isPhone() && !matchMedia('(prefers-reduced-motion: reduce)').matches){
+    document.body.animate([{opacity:.75},{opacity:1}],{duration:220,easing:'ease-out'});
   }
 })();
