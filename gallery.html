@@ -39,27 +39,7 @@
     <button class="mobile-app-icon" data-menu aria-label="Open menu">☰</button>
   </div>
 </div>
-<div class="mobile-install-banner">
-  <div><strong>KPA in your pocket</strong><span>Add this site to your home screen for an app-like experience.</span></div>
-  <a class="btn" href="portal.html">Open Portal</a>
-</div>
-
-<header class="site-header">
-  <div class="container navbar">
-    <a class="brand" href="index.html" aria-label="Keffi Premier Academy home">
-      <img src="assets/images/kpa-logo.jpg" alt="Keffi Premier Academy logo">
-      <div class="brand-copy"><strong>Keffi Premier Academy</strong><span>Helping to Better Lives</span></div>
-    </a>
-    <nav class="main-nav" aria-label="Main navigation">
-      <div class="nav-item"><button type="button">Our School ▾</button>
-        <div class="mega">
-          <a href="about.html"><strong>About KPA</strong><span>History, vision, mission and values</span></a>
-          <a href="leadership.html"><strong>Leadership & Staff</strong><span>School management and teachers</span></a>
-          <a href="facilities.html"><strong>Facilities</strong><span>Explore our learning environment</span></a>
-          <a href="achievements.html"><strong>Achievements</strong><span>Celebrate student success</span></a>
-        </div>
-      </div>
-      <div class="nav-item"><button type="button">Learning ▾</button>
+<div class="nav-item"><button type="button">Learning ▾</button>
         <div class="mega">
           <a href="academics.html"><strong>Academics</strong><span>Curriculum and learning experience</span></a>
           <a href="wellness.html"><strong>Premier Wellness Club</strong><span>Mental health, clubs and leadership</span></a>
@@ -141,10 +121,23 @@
   <a href="portal.html" data-dock="portal"><span>↗</span><span>Portal</span></a>
 </nav>
 
-<div class="floating-actions" aria-label="Quick actions">
-  <a class="float-btn whatsapp" href="#" aria-label="WhatsApp the school" title="Replace with official WhatsApp link">WA</a>
-  <a class="float-btn portal" href="portal.html" aria-label="Portal access">↗</a>
-</div>
+
+<button class="kpa-concierge-launcher" type="button" aria-label="Ask KPA">✦</button>
+<aside class="kpa-concierge" aria-label="KPA concierge">
+  <div class="concierge-head"><div><small style="color:#dacfea">KPA DIGITAL CONCIERGE</small><br><strong>How can I guide you?</strong></div><button class="concierge-close" type="button" aria-label="Close concierge">×</button></div>
+  <div class="concierge-body">
+    <div class="concierge-welcome">Choose a common question. This frontend concierge gives quick, accurate navigation without pretending to be a live AI assistant.</div>
+    <div class="concierge-chips">
+      <button class="concierge-chip" type="button" data-ask="admissions">How do I apply?</button>
+      <button class="concierge-chip" type="button" data-ask="portal">How does the portal work?</button>
+      <button class="concierge-chip" type="button" data-ask="wellness">What is Premier Wellness?</button>
+      <button class="concierge-chip" type="button" data-ask="calendar">What's on the calendar?</button>
+      <button class="concierge-chip" type="button" data-ask="contact">How do I contact KPA?</button>
+    </div>
+    <div class="concierge-answer" aria-live="polite"></div>
+  </div>
+</aside>
+
 <div class="a11y-panel">
   <button class="a11y-toggle" aria-label="Accessibility options">Aa</button>
   <div class="a11y-menu">
@@ -153,7 +146,6 @@
     <button type="button" data-motion>Reduce motion</button>
   </div>
 </div>
-<nav class="mobile-dock" aria-label="Mobile quick navigation"><a href="index.html"><span>⌂</span>Home</a><a href="academics.html"><span>✎</span>Learn</a><a href="wellness.html"><span>♡</span>Wellness</a><a class="portal" href="portal.html"><span>↗</span>Portal</a></nav>
 <footer>
   <div class="container">
     <div class="footer-grid">
