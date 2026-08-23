@@ -124,3 +124,17 @@ Search `portal.html` for:
 - `assets/js/main.js`
 - `assets/images/...`
 - `manifest.webmanifest`
+
+
+## V6 interaction upgrades
+- True rotating announcement carousel with previous/next controls and auto-rotation
+- Gamified premium buttons with shine, depth, press feedback and icon animation
+- "Choose Your Premier Quest" interactive student cards
+- "Choose Your Adventure" interactive pathway selector
+- Safe celebratory confetti for completing the mini learning challenge
+- Discovery badge unlock feedback (session-only, no tracking)
+- Curiosity Door micro-learning interaction
+- Desktop pointer tilt effects on quest cards
+- Richer hover/tap elevation across cards
+- Animated announcement background and live indicator
+- No streaks, loot boxes, infinite-scroll traps, hidden tracking, or manipulative engagement mechanics

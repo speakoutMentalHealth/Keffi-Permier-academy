@@ -11,23 +11,28 @@
     <div class="utility-links"><a href="calendar.html">Calendar</a><a href="downloads.html">Downloads</a><a href="faq.html">FAQ</a><a href="portal.html">Portal</a></div>
   </div>
 </div>
+
 <div class="announcement">
   <div class="container">
-    <strong>Latest</strong>
-    <div class="ticker" aria-label="Announcements">
-      <div class="ticker-track">
-        <span>Premier Wellness Club launches next term</span>
-        <span>Admissions enquiries are now open</span>
-        <span>Student and Parent Portal access will be powered through SpeakOut</span>
-        <span>Parent & Teacher capacity-building programme coming soon</span>
-        <span aria-hidden="true">Premier Wellness Club launches next term</span>
-        <span aria-hidden="true">Admissions enquiries are now open</span>
-        <span aria-hidden="true">Student and Parent Portal access will be powered through SpeakOut</span>
-        <span aria-hidden="true">Parent & Teacher capacity-building programme coming soon</span>
+    <div class="announcement-carousel" aria-label="School announcements">
+      <div class="announcement-label"><span class="live-dot"></span>Latest</div>
+      <div class="announcement-stage" aria-live="polite">
+        <a class="announcement-item active" href="wellness.html">Premier Wellness Club launches next term — explore the new student wellbeing framework →</a>
+        <a class="announcement-item" href="admissions.html">Admissions enquiries are open — discover the Keffi Premier Academy experience →</a>
+        <a class="announcement-item" href="portal.html">Student & Parent digital access will be powered through the SpeakOut Portal →</a>
+        <a class="announcement-item" href="events.html">Parent and Teacher capacity-building programmes are coming this term →</a>
+      </div>
+      <div class="announcement-controls">
+        <button class="announcement-arrow" type="button" data-ann-prev aria-label="Previous announcement">‹</button>
+        <div class="announcement-dots" aria-hidden="true">
+          <button class="announcement-dot active" type="button"></button><button class="announcement-dot" type="button"></button><button class="announcement-dot" type="button"></button><button class="announcement-dot" type="button"></button>
+        </div>
+        <button class="announcement-arrow" type="button" data-ann-next aria-label="Next announcement">›</button>
       </div>
     </div>
   </div>
 </div>
+
 <header class="site-header">
   <div class="container navbar">
     <a class="brand" href="index.html" aria-label="Keffi Premier Academy home">
@@ -99,7 +104,7 @@
     <div class="kicker" style="color:var(--gold2)">Keffi • Nasarawa State • Nigeria</div>
     <h1>Knowledge to excel.<br>Character to lead.<br><em>Wellbeing to thrive.</em></h1>
     <p class="hero-copy">A premium Nigerian Muslim school experience where academic ambition, strong values, technology, creativity and student mental health are intentionally developed together.</p>
-    <div class="actions" style="margin-top:26px"><a class="btn btn-gold" href="admissions.html">Discover Admissions →</a><a class="btn btn-ghost" href="about.html">Explore KPA</a></div>
+    <div class="actions" style="margin-top:26px"><a class="btn btn-gold" href="admissions.html"><span class="btn-icon">✦</span>Discover Admissions</a><a class="btn btn-ghost" href="about.html"><span class="btn-icon">↗</span>Explore KPA</a></div>
     <div class="hero-dots" aria-label="Hero slides"><button class="hero-dot active" aria-label="Slide 1"></button><button class="hero-dot" aria-label="Slide 2"></button><button class="hero-dot" aria-label="Slide 3"></button></div>
   </div>
   <div class="hero-float">
@@ -107,7 +112,7 @@
   </div>
 </section>
 
-<section class="section geo-pattern">
+<section class="section geo-pattern"><span class="playful-shape" style="width:180px;height:180px;background:#6b49bf;left:-60px;top:30px"></span>
   <div class="container manifesto-grid reveal">
     <div><div class="kicker">This is Premier</div><p class="lead">Our school identity is not defined by one subject, one examination or one activity. It is defined by what our students are becoming.</p></div>
     <div>
@@ -144,9 +149,49 @@
   </div>
 </section>
 
+
+<section class="section" style="background:#fff">
+  <div class="container reveal">
+    <div class="kicker">Choose Your Premier Quest</div>
+    <h2>What will you explore today?</h2>
+    <p class="lead">A playful way for students to discover the different sides of school life. No scores are stored—this is about curiosity, not pressure.</p>
+    <div class="quest-grid">
+      <article class="quest-card tilt-card" data-tilt>
+        <div class="quest-icon">🧪</div><h3>STEM Explorer</h3><p>Experiment, solve, build and test ideas.</p><div class="quest-xp">Curiosity Quest</div><a class="btn btn-outline" href="academics.html">Explore STEM</a>
+      </article>
+      <article class="quest-card tilt-card" data-tilt>
+        <div class="quest-icon">💻</div><h3>Digital Creator</h3><p>Discover ICT, digital confidence and responsible technology.</p><div class="quest-xp">Future Skills Quest</div><a class="btn btn-outline" href="academics.html">Explore ICT</a>
+      </article>
+      <article class="quest-card tilt-card" data-tilt>
+        <div class="quest-icon">🎭</div><h3>Creative Voice</h3><p>Perform, write, speak and express ideas confidently.</p><div class="quest-xp">Expression Quest</div><a class="btn btn-outline" href="wellness.html">Explore Clubs</a>
+      </article>
+      <article class="quest-card tilt-card" data-tilt>
+        <div class="quest-icon">🌱</div><h3>Wellbeing Hero</h3><p>Build resilience, belonging and healthy habits.</p><div class="quest-xp">Wellbeing Quest</div><a class="btn btn-outline" href="wellness.html">Explore Wellness</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section geo-pattern">
+  <div class="container reveal">
+    <div class="adventure-shell" data-adventure>
+      <div class="kicker">Choose Your Adventure</div>
+      <h2 style="font-size:clamp(2rem,4vw,3.7rem)">A day at Premier can take many paths.</h2>
+      <p class="lead">Tap a path to preview a different student experience.</p>
+      <div class="adventure-map">
+        <button class="adventure-step active" type="button" data-adventure-step="learn"><span class="adventure-bubble">📚</span><span class="adventure-caption">Learn</span></button>
+        <button class="adventure-step" type="button" data-adventure-step="build"><span class="adventure-bubble">🛠️</span><span class="adventure-caption">Build</span></button>
+        <button class="adventure-step" type="button" data-adventure-step="connect"><span class="adventure-bubble">🤝</span><span class="adventure-caption">Connect</span></button>
+        <button class="adventure-step" type="button" data-adventure-step="lead"><span class="adventure-bubble">⭐</span><span class="adventure-caption">Lead</span></button>
+      </div>
+      <div class="adventure-detail" id="adventureDetail"><h3>Start with learning.</h3><p>Explore lessons, literacy, science and the skills that turn curiosity into confidence.</p></div>
+    </div>
+  </div>
+</section>
+
 <section class="section wellness-section">
   <div class="container wellness-grid">
-    <div class="reveal"><div class="kicker" style="color:var(--gold2)">Premier Wellness Club</div><h2>One ecosystem. One central goal: student wellbeing.</h2><p class="lead">Existing clubs remain distinct, but now work within a shared mental-health, safeguarding, leadership and reporting framework.</p><div id="orbitInfo" class="orbit-info"><h3>Explore the ecosystem</h3><p>Tap a club to see how it contributes to the whole-child framework.</p></div><div class="actions" style="margin-top:20px"><a class="btn btn-gold" href="wellness.html">Explore Premier Wellness →</a></div></div>
+    <div class="reveal"><div class="kicker" style="color:var(--gold2)">Premier Wellness Club</div><h2>One ecosystem. One central goal: student wellbeing.</h2><p class="lead">Existing clubs remain distinct, but now work within a shared mental-health, safeguarding, leadership and reporting framework.</p><div id="orbitInfo" class="orbit-info"><h3>Explore the ecosystem</h3><p>Tap a club to see how it contributes to the whole-child framework.</p></div><div class="actions" style="margin-top:20px"><a class="btn btn-gold" href="wellness.html"><span class="btn-icon">♡</span>Explore Premier Wellness</a></div></div>
     <div class="orbit reveal" aria-label="Interactive wellness club ecosystem">
       <div class="orbit-ring"></div><div class="orbit-center"><strong>STUDENT<br>MENTAL HEALTH<br>& WELLBEING</strong></div>
       <button class="orbit-node n1" data-orbit="ict">ICT Club</button><button class="orbit-node n2" data-orbit="stem">STEM Club</button><button class="orbit-node n3" data-orbit="literacy">Spelling Bee & Literacy</button><button class="orbit-node n4" data-orbit="culture">Culture & Drama</button><button class="orbit-node n5" data-orbit="muslim">Muslim Students</button><button class="orbit-node n6" data-orbit="leadership">Leadership</button>
@@ -166,6 +211,17 @@
           <button class="choice" data-correct="false">Skipping breakfast and rushing to school</button>
         </div>
         <div class="stars" aria-label="Explorer stars"><span>★</span><span>★</span><span>★</span></div><p id="quizMsg" aria-live="polite"></p><button class="btn btn-outline" id="quizReset" type="button">Try again</button>
+<div class="badge-shelf" aria-label="Demo discovery badges">
+  <div class="achievement-badge" id="badgeExplorer"><span class="badge-medal">✦</span><div><strong>Explorer</strong><div class="muted">Complete the mini challenge</div></div></div>
+  <div class="achievement-badge"><span class="badge-medal">♡</span><div><strong>Wellbeing Thinker</strong><div class="muted">Explore a wellbeing resource</div></div></div>
+</div>
+<div class="curiosity-box" id="curiosityBox">
+  <strong>Curiosity Door ✨</strong>
+  <p class="muted">Want one surprising brain fact?</p>
+  <button class="btn btn-outline" type="button" id="curiosityBtn">Open the door</button>
+  <div class="curiosity-reveal"><strong>Brain fact:</strong> Sleep helps your brain strengthen what you learned during the day. Rest is part of learning, not time away from it.</div>
+</div>
+
       </div>
       <div class="challenge-card">
         <div class="tag">Private check-in</div><h3 style="margin-top:14px">How are you feeling right now?</h3><p class="muted">Nothing is saved or sent anywhere in this demo.</p>
@@ -199,13 +255,13 @@
 
 <section class="section">
   <div class="container portal-preview">
-    <div class="reveal"><div class="kicker">KPA Digital Community</div><h2>One school community. Connected.</h2><p class="lead">The public website stays fast and open. Personalized student, parent, teacher and administration services live securely inside the SpeakOut Portal.</p><div class="actions" style="margin-top:22px"><a class="btn btn-primary" href="portal.html">Access the portal gateway →</a></div></div>
+    <div class="reveal"><div class="kicker">KPA Digital Community</div><h2>One school community. Connected.</h2><p class="lead">The public website stays fast and open. Personalized student, parent, teacher and administration services live securely inside the SpeakOut Portal.</p><div class="actions" style="margin-top:22px"><a class="btn btn-primary" href="portal.html"><span class="btn-icon">↗</span>Access the portal gateway</a></div></div>
     <div class="device reveal"><div class="device-screen"><div class="portal-top"><strong style="color:var(--purple)">KPA on SpeakOut</strong><span class="tag">Secure</span></div><h3 style="margin-top:30px">Welcome to your school workspace</h3><div class="portal-cards"><div class="portal-card"><strong>Student</strong><span>Resources & activities</span></div><div class="portal-card"><strong>Parent</strong><span>Resources & updates</span></div><div class="portal-card"><strong>Teacher</strong><span>Training & reports</span></div><div class="portal-card"><strong>Admin</strong><span>Oversight & management</span></div></div></div></div>
   </div>
 </section>
 
 <section class="section geo-pattern" style="background:#efe9ff">
-  <div class="container reveal" style="text-align:center"><div class="kicker">Admissions</div><h2>Could this be your child's next chapter?</h2><p class="lead" style="margin-inline:auto">Discover a school where knowledge, character, faith-aware values and wellbeing are developed together.</p><div class="actions" style="justify-content:center;margin-top:24px"><a class="btn btn-primary" href="admissions.html">Begin an enquiry</a><a class="btn btn-outline" href="contact.html">Arrange a visit</a></div></div>
+  <div class="container reveal" style="text-align:center"><div class="kicker">Admissions</div><h2>Could this be your child's next chapter?</h2><p class="lead" style="margin-inline:auto">Discover a school where knowledge, character, faith-aware values and wellbeing are developed together.</p><div class="actions" style="justify-content:center;margin-top:24px"><a class="btn btn-primary" href="admissions.html"><span class="btn-icon">✦</span>Begin an enquiry</a><a class="btn btn-outline" href="contact.html">Arrange a visit</a></div></div>
 </section>
 </main>
 
