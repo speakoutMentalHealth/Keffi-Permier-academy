@@ -118,11 +118,7 @@
 </div>
 
 <main><section class="page-hero" style="background-image:linear-gradient(90deg,rgba(26,10,73,.95),rgba(26,10,73,.35)),url('assets/images/muslim-students-girls.jpg')"><div class="container"><div class="kicker" style="color:var(--gold2)">News & Announcements</div><h1>The story of KPA in motion.</h1><p>Publish school news, announcements, programme updates and student stories.</p></div></section>
-<section class="section"><div class="container"><div class="filter-bar" data-filter-group><button class="filter-btn active" data-filter="all">All</button><button class="filter-btn" data-filter="school">School</button><button class="filter-btn" data-filter="wellness">Wellness</button><button class="filter-btn" data-filter="academic">Academic</button></div><div class="page-grid">
-<article class="card" data-category="wellness"><span class="tag">Wellness</span><h3>Premier Wellness Club launches next term</h3><p>The umbrella framework will bring existing clubs together around student wellbeing, leadership and positive engagement.</p></article>
-<article class="card" data-category="academic"><span class="tag">Academic</span><h3>STEM spotlight</h3><p>Use this space to feature authentic student projects, competitions and academic achievements.</p></article>
-<article class="card" data-category="school"><span class="tag">School</span><h3>Important announcement</h3><p>Use this space for approved school notices and family communication.</p></article>
-</div></div></section></main>
+<section class="section"><div class="container"><div class="filter-bar" data-filter-group><button class="filter-btn active" data-filter="all">All</button><button class="filter-btn" data-filter="school">School</button><button class="filter-btn" data-filter="wellness">Wellness</button><button class="filter-btn" data-filter="academic">Academic</button></div><div class="page-grid cms-news-grid" id="newsGrid"><article class="card"><span class="tag">School</span><h3>KPA News</h3><p>Published articles from the admin dashboard will appear here automatically.</p></article></div></div></section><div class="cms-modal" id="newsModal"><div class="cms-modal-card"><button class="cms-modal-close" data-news-close type="button">×</button><div class="kicker">KPA Story</div><h2 data-news-title></h2><div class="cms-story-content" data-news-content></div></div></div></main>
 
 <nav class="mobile-app-dock" aria-label="Mobile app navigation">
   <a href="index.html" data-dock="index"><span>⌂</span><span>Home</span></a>
@@ -175,5 +171,5 @@
   </div>
 </footer>
 <script>document.getElementById('year').textContent=new Date().getFullYear()</script>
-<script src="assets/js/main.js?v=11.0.0"></script>
+<script src="assets/js/supabase-config.js"></script><script type="module" src="assets/js/cms.js"></script><script src="assets/js/main.js?v=11.0.0"></script>
 <script>if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js').catch(()=>{}));}</script></body></html>
