@@ -2374,296 +2374,263 @@ body > .nav-actions{
 
 .admission-full-form{margin-top:28px;padding:30px}.admission-form-section{display:grid;grid-template-columns:52px 1fr;gap:14px;padding:28px 0 16px;border-top:1px solid var(--line)}.admission-form-section:first-child{border-top:0;padding-top:0}.admission-section-number{width:46px;height:46px;border-radius:15px;background:#efe9ff;color:var(--purple);display:grid;place-items:center;font-weight:900}.admission-consent label{display:flex;gap:9px;align-items:flex-start}.admission-consent input{width:auto;margin-top:4px}.admission-submit-row{display:flex;justify-content:space-between;gap:20px;align-items:center;border-top:1px solid var(--line);padding-top:20px;margin-top:22px}.form-status.success{margin-top:14px;padding:14px;border-radius:14px;background:#e9f7ef;color:#176445}.form-status.error{margin-top:14px;padding:14px;border-radius:14px;background:#fdecea;color:#9b291f}.cms-news-card{padding:0!important;overflow:hidden}.cms-news-image{height:220px;width:100%;object-fit:cover}.cms-news-body{padding:22px}.cms-news-meta{font-size:.78rem;color:var(--muted);margin:10px 0 14px}.cms-modal{position:fixed;inset:0;background:rgba(16,7,38,.78);z-index:170;display:none;place-items:center;padding:20px}.cms-modal.open{display:grid}.cms-modal-card{position:relative;width:min(800px,100%);max-height:88vh;overflow:auto;background:#fff;border-radius:26px;padding:28px}.cms-modal-close{position:absolute;right:16px;top:16px;border:0;width:40px;height:40px;border-radius:12px;background:#eee9f7}.cms-story-content{white-space:pre-wrap;line-height:1.75}@media(max-width:767px){.admission-full-form{padding:20px}.admission-form-section{grid-template-columns:42px 1fr}.admission-section-number{width:38px;height:38px}.admission-submit-row{display:grid}.admission-submit-row .btn{width:100%}.cms-news-image{height:180px}}
 
-
 /* =========================================================
-   V15 — PREMIER COMPASS RESPONSIVE REBUILD
-   Fixes overlap on desktop/laptop and refines mobile spacing.
+   V15 FINAL VISUAL FIX — PREMIER COMPASS + MEDIA GUARD
    ========================================================= */
 
-.premier-compass{
-  width:min(100%,760px)!important;
-  max-width:760px!important;
-  aspect-ratio:1/1!important;
-  position:relative!important;
-  margin:0 auto!important;
-  overflow:visible!important;
-  isolation:isolate!important;
+/*
+  IMPORTANT: Older hover/active rules used `transform: translateY(-4px)`
+  on every compass node. Because the compass positions themselves also use
+  transform for centering, that interaction destroyed the node coordinates.
+  V15 keeps each node's positioning transform intact at all times.
+*/
+.compass-node:hover,
+.compass-node.active{
+  background:#fff;
+  color:#20104d;
+  box-shadow:0 18px 40px rgba(0,0,0,.20);
 }
 
-.premier-compass .compass-svg{
-  position:absolute!important;
-  inset:7%!important;
-  width:86%!important;
-  height:86%!important;
-  display:block!important;
-  z-index:0!important;
-  overflow:visible!important;
+.compass-node.c1:hover,
+.compass-node.c1.active{
+  transform:translateX(-50%) scale(1.025)!important;
+}
+.compass-node.c2:hover,
+.compass-node.c2.active{
+  transform:translateY(-50%) scale(1.025)!important;
+}
+.compass-node.c3:hover,
+.compass-node.c3.active{
+  transform:translateX(-50%) scale(1.025)!important;
+}
+.compass-node.c4:hover,
+.compass-node.c4.active{
+  transform:translateY(-50%) scale(1.025)!important;
 }
 
-.premier-compass .compass-core{
-  position:absolute!important;
-  left:50%!important;
-  top:50%!important;
-  transform:translate(-50%,-50%)!important;
-  width:clamp(170px,25%,196px)!important;
-  height:clamp(170px,25%,196px)!important;
-  padding:20px!important;
-  border-radius:50%!important;
-  z-index:3!important;
-  box-shadow:
-    0 0 0 14px rgba(255,255,255,.035),
-    0 0 0 34px rgba(255,255,255,.02),
-    0 20px 50px rgba(10,3,34,.22)!important;
-}
-
-.premier-compass .compass-core strong{
-  font-size:clamp(1.05rem,1.7vw,1.32rem)!important;
-  line-height:1.38!important;
-  letter-spacing:.01em!important;
-}
-
-.premier-compass .compass-node{
-  position:absolute!important;
-  width:clamp(148px,23%,174px)!important;
-  min-height:96px!important;
-  height:auto!important;
-  padding:15px 17px!important;
-  border-radius:24px!important;
-  display:flex!important;
-  flex-direction:column!important;
-  justify-content:center!important;
-  gap:5px!important;
-  z-index:4!important;
-  overflow:visible!important;
-  white-space:normal!important;
-  text-align:left!important;
-  box-shadow:0 12px 28px rgba(8,3,30,.10)!important;
-}
-
-.premier-compass .compass-node small{
-  display:block!important;
-  font-size:.67rem!important;
-  line-height:1!important;
-  letter-spacing:.13em!important;
-  white-space:nowrap!important;
-}
-
-.premier-compass .compass-node strong{
-  display:block!important;
-  font-size:clamp(.96rem,1.5vw,1.14rem)!important;
-  line-height:1.2!important;
-  white-space:normal!important;
-  overflow:visible!important;
-}
-
-/* Deliberate cardinal spacing — no contact with centre circle */
-.premier-compass .compass-node.c1{
-  left:50%!important;
-  top:2.5%!important;
-  right:auto!important;
-  bottom:auto!important;
-  transform:translateX(-50%)!important;
-}
-
-.premier-compass .compass-node.c2{
-  right:1.5%!important;
-  top:50%!important;
-  left:auto!important;
-  bottom:auto!important;
-  transform:translateY(-50%)!important;
-}
-
-.premier-compass .compass-node.c3{
-  left:50%!important;
-  bottom:2.5%!important;
-  right:auto!important;
-  top:auto!important;
-  transform:translateX(-50%)!important;
-}
-
-.premier-compass .compass-node.c4{
-  left:1.5%!important;
-  top:50%!important;
-  right:auto!important;
-  bottom:auto!important;
-  transform:translateY(-50%)!important;
-}
-
-/* Preserve cardinal positioning during hover/active states */
-.premier-compass .compass-node.c1:hover,
-.premier-compass .compass-node.c1.active{
-  transform:translateX(-50%) translateY(-4px)!important;
-}
-.premier-compass .compass-node.c2:hover,
-.premier-compass .compass-node.c2.active{
-  transform:translateY(-50%) translateX(-4px)!important;
-}
-.premier-compass .compass-node.c3:hover,
-.premier-compass .compass-node.c3.active{
-  transform:translateX(-50%) translateY(4px)!important;
-}
-.premier-compass .compass-node.c4:hover,
-.premier-compass .compass-node.c4.active{
-  transform:translateY(-50%) translateX(4px)!important;
-}
-
-/* Large desktop */
-@media(min-width:1280px){
+/* Desktop/laptop: deliberate geometry with clear separation. */
+@media(min-width:1024px){
   .compass-grid{
-    grid-template-columns:minmax(360px,.78fr) minmax(620px,1.22fr)!important;
-    gap:72px!important;
+    grid-template-columns:minmax(360px,.82fr) minmax(620px,1.18fr)!important;
+    gap:clamp(44px,5vw,84px)!important;
   }
   .premier-compass{
-    width:min(100%,780px)!important;
-    max-width:780px!important;
+    width:min(100%,720px)!important;
+    max-width:720px!important;
+    min-width:600px!important;
+    aspect-ratio:1/1!important;
+    overflow:visible!important;
+    isolation:isolate;
   }
-}
-
-/* Laptop */
-@media(min-width:1024px) and (max-width:1279px){
-  .compass-grid{
-    grid-template-columns:minmax(330px,.82fr) minmax(560px,1.18fr)!important;
-    gap:44px!important;
+  .compass-svg{
+    position:absolute!important;
+    inset:7%!important;
+    width:86%!important;
+    height:86%!important;
+    opacity:.86;
+    pointer-events:none;
   }
-  .premier-compass{
-    width:min(100%,650px)!important;
-    max-width:650px!important;
-  }
-  .premier-compass .compass-core{
-    width:176px!important;
-    height:176px!important;
-  }
-  .premier-compass .compass-node{
-    width:150px!important;
-    min-height:92px!important;
-  }
-}
-
-/* Tablet: stack text above compass and preserve generous canvas */
-@media(min-width:768px) and (max-width:1023px){
-  .compass-grid{
-    grid-template-columns:1fr!important;
-    gap:38px!important;
-  }
-  .premier-compass{
-    width:min(92vw,620px)!important;
-    max-width:620px!important;
-  }
-  .premier-compass .compass-core{
-    width:164px!important;
-    height:164px!important;
-  }
-  .premier-compass .compass-node{
-    width:146px!important;
-    min-height:90px!important;
-  }
-}
-
-/* Phone */
-@media(max-width:767px){
-  .compass-section{
-    overflow:hidden!important;
-  }
-
-  .compass-grid{
-    grid-template-columns:1fr!important;
-    gap:26px!important;
-  }
-
-  .premier-compass{
-    width:min(94vw,360px)!important;
-    max-width:360px!important;
-    margin:8px auto 2px!important;
-  }
-
-  .premier-compass .compass-svg{
-    inset:8%!important;
-    width:84%!important;
-    height:84%!important;
-  }
-
-  .premier-compass .compass-core{
-    width:116px!important;
-    height:116px!important;
-    padding:12px!important;
+  .compass-core{
+    width:190px!important;
+    height:190px!important;
+    padding:24px!important;
+    z-index:5!important;
     box-shadow:
-      0 0 0 9px rgba(255,255,255,.035),
-      0 0 0 20px rgba(255,255,255,.02)!important;
+      0 0 0 16px rgba(255,255,255,.04),
+      0 0 0 38px rgba(255,255,255,.025),
+      0 22px 50px rgba(8,3,28,.18)!important;
+  }
+  .compass-core strong{
+    font-size:1.12rem!important;
+    line-height:1.35!important;
+  }
+  .compass-node{
+    width:164px!important;
+    min-height:102px!important;
+    padding:17px!important;
+    border-radius:24px!important;
+    z-index:6!important;
+  }
+  .compass-node strong{
+    font-size:1.03rem!important;
+    line-height:1.25!important;
+  }
+  .compass-node small{
+    font-size:.65rem!important;
+    margin-bottom:5px!important;
   }
 
-  .premier-compass .compass-core strong{
+  /* Pull the four cards toward cardinal edges, leaving a safe central gap. */
+  .compass-node.c1{top:2%!important;left:50%!important}
+  .compass-node.c2{right:1%!important;top:50%!important}
+  .compass-node.c3{bottom:2%!important;left:50%!important}
+  .compass-node.c4{left:1%!important;top:50%!important}
+}
+
+/* Mid-size laptops: keep it spacious without forcing horizontal overflow. */
+@media(min-width:1024px) and (max-width:1240px){
+  .compass-grid{
+    grid-template-columns:minmax(330px,.85fr) minmax(520px,1.15fr)!important;
+    gap:36px!important;
+  }
+  .premier-compass{
+    min-width:520px!important;
+    max-width:610px!important;
+  }
+  .compass-core{width:170px!important;height:170px!important}
+  .compass-node{width:148px!important;min-height:94px!important}
+}
+
+/* Tablet: diagram gets its own row and remains centered. */
+@media(min-width:768px) and (max-width:1023px){
+  .compass-grid{grid-template-columns:1fr!important;gap:34px!important}
+  .premier-compass{
+    width:min(92vw,610px)!important;
+    max-width:610px!important;
+    overflow:visible!important;
+  }
+  .compass-core{width:166px!important;height:166px!important;z-index:5!important}
+  .compass-node{width:142px!important;min-height:92px!important;z-index:6!important}
+}
+
+/* Phone: compact but every label stays fully visible. */
+@media(max-width:767px){
+  .premier-compass{
+    width:min(92vw,370px)!important;
+    max-width:370px!important;
+    min-width:0!important;
+    aspect-ratio:1/1!important;
+    overflow:visible!important;
+    margin:6px auto 12px!important;
+  }
+  .compass-svg{
+    position:absolute!important;
+    inset:7%!important;
+    width:86%!important;
+    height:86%!important;
+    pointer-events:none;
+  }
+  .compass-core{
+    width:122px!important;
+    height:122px!important;
+    padding:13px!important;
+    z-index:5!important;
+    box-shadow:
+      0 0 0 10px rgba(255,255,255,.04),
+      0 0 0 22px rgba(255,255,255,.025)!important;
+  }
+  .compass-core strong{
     font-size:.78rem!important;
     line-height:1.42!important;
   }
+  .compass-node{
+    width:102px!important;
+    min-height:72px!important;
+    padding:10px!important;
+    border-radius:18px!important;
+    z-index:6!important;
+  }
+  .compass-node strong{font-size:.72rem!important;line-height:1.2!important}
+  .compass-node small{font-size:.49rem!important;margin-bottom:4px!important}
+  .compass-node.c1{top:0!important;left:50%!important}
+  .compass-node.c2{right:0!important;top:50%!important}
+  .compass-node.c3{bottom:0!important;left:50%!important}
+  .compass-node.c4{left:0!important;top:50%!important}
 
-  .premier-compass .compass-node{
-    width:96px!important;
-    min-height:70px!important;
-    padding:9px 10px!important;
-    border-radius:17px!important;
-    gap:4px!important;
-  }
-
-  .premier-compass .compass-node small{
-    font-size:.50rem!important;
-    letter-spacing:.12em!important;
-  }
-
-  .premier-compass .compass-node strong{
-    font-size:.70rem!important;
-    line-height:1.15!important;
-  }
-
-  .premier-compass .compass-node.c1{
-    top:1.5%!important;
-  }
-
-  .premier-compass .compass-node.c2{
-    right:0!important;
-  }
-
-  .premier-compass .compass-node.c3{
-    bottom:1.5%!important;
-  }
-
-  .premier-compass .compass-node.c4{
-    left:0!important;
-  }
-
-  /* No hover translation on touch layouts */
-  .premier-compass .compass-node.c1:hover,
-  .premier-compass .compass-node.c1.active{
-    transform:translateX(-50%)!important;
-  }
-  .premier-compass .compass-node.c2:hover,
-  .premier-compass .compass-node.c2.active{
-    transform:translateY(-50%)!important;
-  }
-  .premier-compass .compass-node.c3:hover,
-  .premier-compass .compass-node.c3.active{
-    transform:translateX(-50%)!important;
-  }
-  .premier-compass .compass-node.c4:hover,
-  .premier-compass .compass-node.c4.active{
-    transform:translateY(-50%)!important;
-  }
+  /* Keep the next section clear of the fixed bottom navigation. */
+  .compass-section{padding-bottom:70px!important}
 }
 
-/* Very narrow phones */
 @media(max-width:359px){
-  .premier-compass{
-    width:min(96vw,330px)!important;
-  }
-  .premier-compass .compass-core{
-    width:106px!important;
-    height:106px!important;
-  }
-  .premier-compass .compass-node{
-    width:88px!important;
-    min-height:65px!important;
-    padding:8px!important;
-  }
-  .premier-compass .compass-node strong{
-    font-size:.65rem!important;
-  }
+  .premier-compass{width:330px!important;max-width:calc(100vw - 18px)!important}
+  .compass-core{width:108px!important;height:108px!important}
+  .compass-node{width:92px!important;min-height:66px!important;padding:8px!important}
+  .compass-node strong{font-size:.66rem!important}
+}
+
+/* Site-owned video/media must stay inside document flow. */
+video,
+iframe[src*="youtube.com"],
+iframe[src*="youtu.be"]{
+  max-width:100%;
+}
+.kpa-inline-video,
+.video-embed,
+.media-video{
+  position:relative!important;
+  inset:auto!important;
+  width:100%!important;
+  max-width:100%!important;
+  transform:none!important;
+  z-index:auto!important;
+}
+
+/* No site video is allowed to become an in-page floating overlay. */
+body > video,
+body > .floating-video,
+body > .video-float,
+body > .pip-video{
+  display:none!important;
+}
+
+
+/* =========================================================
+   AUTHENTIC KPA CONTENT UPDATE
+   ========================================================= */
+.authentic-story-grid{
+  display:grid;
+  grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);
+  align-items:center;
+  gap:clamp(28px,5vw,72px);
+}
+.authentic-story-image{
+  border-radius:30px;
+  overflow:hidden;
+  min-height:420px;
+  background:#ede8f5;
+  box-shadow:0 24px 60px rgba(42,20,96,.12);
+}
+.authentic-story-image img{width:100%;height:100%;object-fit:cover;display:block}
+.learning-showcase,.achievement-gallery,.video-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:18px;
+  margin-top:28px;
+}
+.learning-photo-card,.achievement-gallery article,.inline-video-card{
+  background:#fff;
+  border:1px solid rgba(43,20,110,.10);
+  border-radius:24px;
+  overflow:hidden;
+  box-shadow:0 16px 38px rgba(43,20,110,.08);
+}
+.learning-photo-card img,.achievement-gallery article img{
+  width:100%;
+  height:280px;
+  object-fit:cover;
+  display:block;
+}
+.learning-photo-card>div,.achievement-gallery article>div,.inline-video-card>div{padding:20px}
+.authentic-gallery .gallery-item img{object-position:center}
+.inline-video-card video{
+  display:block;
+  width:100%;
+  aspect-ratio:16/9;
+  object-fit:cover;
+  background:#16083e;
+  position:static!important;
+  inset:auto!important;
+  transform:none!important;
+  z-index:auto!important;
+}
+.inline-video-card{position:relative}
+.video-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(max-width:900px){
+  .authentic-story-grid{grid-template-columns:1fr}
+  .learning-showcase,.achievement-gallery{grid-template-columns:1fr 1fr}
+}
+@media(max-width:767px){
+  .authentic-story-image{min-height:300px;border-radius:24px}
+  .learning-showcase,.achievement-gallery,.video-grid{grid-template-columns:1fr;gap:14px}
+  .learning-photo-card img,.achievement-gallery article img{height:230px}
 }
