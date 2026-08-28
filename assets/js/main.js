@@ -62,7 +62,7 @@
     stem:['STEM Club','Curiosity, experimentation, teamwork and practical problem-solving.'],
     literacy:['Spelling Bee & Literacy','Reading, language, communication and confident expression.'],
     culture:['Culture & Drama','Creativity, identity, performance, teamwork and self-expression.'],
-    muslim:['Muslim Students Club','Positive faith-aware student engagement, character and community within school safeguarding standards.'],
+    muslim:['Muslim Students Club','Student-led faith, values, positive conduct and community within school safeguarding standards.'],
     leadership:['Leadership Development','Mentorship, service, responsibility, confidence and student voice.']
   };
   $$('.orbit-node').forEach(n=>n.addEventListener('click',()=>{
@@ -251,7 +251,7 @@
     character:{
       label:'Character',
       title:'Values become daily habits.',
-      text:'Integrity, responsibility, respect, compassion and faith-aware character are reinforced through school culture, relationships and leadership.',
+      text:'Integrity, responsibility, respect, compassion and positive character are reinforced through school culture, relationships and leadership.',
       link:'about.html'
     },
     wellbeing:{
@@ -278,11 +278,11 @@
   /* A day at KPA */
   const dayStage=$('#dayStage'),dayImage=$('#dayImage'),dayTime=$('#dayClock'),dayTitle=$('#dayTitle'),dayText=$('#dayText'),dayProgress=$('#dayProgress');
   const dayData={
-    arrival:['07:30','Arrival & Welcome','Students enter a calm, values-led environment and begin the day with connection, preparation and purpose.','assets/images/muslim-students-girls.jpg',20],
-    learn:['09:15','Deep Learning','Core academics, science, literacy and problem-solving build strong knowledge foundations.','assets/images/african-students-boys.jpg',40],
-    create:['12:30','Create & Explore','ICT, STEM, literacy, culture and drama give students practical ways to discover strengths.','assets/images/muslim-students-girls.jpg',60],
-    belong:['14:00','Clubs & Belonging','Premier Wellness Club activities create structured opportunities for connection, mentoring and positive participation.','assets/images/african-students-boys.jpg',80],
-    reflect:['15:30','Reflect & Grow','Students leave with more than completed lessons: they carry new knowledge, stronger confidence and a clearer sense of responsibility.','assets/images/muslim-students-girls.jpg',100]
+    arrival:['07:30','Arrival & Welcome','Students enter a calm, values-led environment and begin the day with connection, preparation and purpose.','assets/images/kpa-student-delegation.webp',20],
+    learn:['09:15','Deep Learning','Core academics, science, literacy and problem-solving build strong knowledge foundations.','assets/images/kpa-ict-lab.webp',40],
+    create:['12:30','Create & Explore','ICT, STEM, literacy, culture and drama give students practical ways to discover strengths.','assets/images/kpa-science-microscope-1.webp',60],
+    belong:['14:00','Clubs & Belonging','Premier Wellness Club activities create structured opportunities for connection, mentoring and positive participation.','assets/images/kpa-student-event-2.webp',80],
+    reflect:['15:30','Reflect & Grow','Students leave with more than completed lessons: they carry new knowledge, stronger confidence and a clearer sense of responsibility.','assets/images/kpa-graduation-group-1.webp',100]
   };
   $$('[data-day]').forEach(btn=>btn.addEventListener('click',()=>{
     $$('[data-day]').forEach(b=>b.classList.remove('active'));btn.classList.add('active');
@@ -501,4 +501,39 @@
 
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);
   else init();
+})();
+
+/* =========================================================
+   V15 MEDIA + COMPASS SAFETY GUARD
+   ========================================================= */
+(() => {
+  // Prevent any site-owned HTML5 video from initiating browser Picture-in-Picture.
+  // Note: browser/OS PiP started by another tab/app cannot be controlled by this site.
+  const hardenVideo = (video) => {
+    try { video.disablePictureInPicture = true; } catch (_) {}
+    video.setAttribute('disablepictureinpicture','');
+    video.removeAttribute('autopictureinpicture');
+    video.addEventListener('enterpictureinpicture', () => {
+      try { document.exitPictureInPicture?.(); } catch (_) {}
+    });
+  };
+  document.querySelectorAll('video').forEach(hardenVideo);
+
+  // If media is inserted later, apply the same rule.
+  if ('MutationObserver' in window) {
+    new MutationObserver((records) => {
+      for (const record of records) {
+        for (const node of record.addedNodes) {
+          if (!(node instanceof Element)) continue;
+          if (node.matches?.('video')) hardenVideo(node);
+          node.querySelectorAll?.('video').forEach(hardenVideo);
+        }
+      }
+    }).observe(document.documentElement,{childList:true,subtree:true});
+  }
+
+  // Compass buttons are buttons, not draggable browser content.
+  document.querySelectorAll('.compass-node').forEach(btn => {
+    btn.setAttribute('draggable','false');
+  });
 })();
