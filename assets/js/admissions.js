@@ -3,6 +3,7 @@ const cfg=window.KPA_SUPABASE_CONFIG||{};
 const ready=cfg.url&&cfg.anonKey&&!cfg.url.includes('YOUR_PROJECT')&&!cfg.anonKey.includes('YOUR_SUPABASE');
 const sb=ready?createClient(cfg.url,cfg.anonKey):null;
 const form=document.querySelector('#fullAdmissionForm'),out=document.querySelector('#admissionMessage');
+if(out)out.setAttribute('role','status');
 const reference=()=>`KPA-ADM-${new Date().getFullYear()}-${crypto.randomUUID().slice(0,6).toUpperCase()}`;
 
 form?.addEventListener('submit',async e=>{
@@ -19,7 +20,14 @@ form?.addEventListener('submit',async e=>{
     emergency_contact_phone:f.get('emergency_contact_phone')||null,previous_school_notes:f.get('previous_school_notes')||null,support_information:f.get('support_information')||null,
     how_heard:f.get('how_heard')||null,parent_message:f.get('parent_message')||null,consent:true,status:'new',source:'website',email_status:'pending'
   };
-  const {data,error}=await sb.from('admission_applications').insert(payload).select('id,reference_number').single();
+  let data,error;
+  try{
+    ({data,error}=await sb.from('admission_applications').insert(payload).select('id,reference_number').single());
+  }catch(networkError){
+    console.error('Admission connection failed:',networkError);
+    out.textContent='Connection interrupted. Please check your internet connection and contact the school before submitting again to avoid duplicate applications.';
+    out.className='form-status error';btn.disabled=false;btn.textContent='Submit Application';return;
+  }
   if(error){console.error(error);out.textContent='We could not submit the application. Please review the form and try again.';out.className='form-status error';btn.disabled=false;btn.textContent='Submit Application';return}
   let emailNote='';
   try{const {data:mailData,error:mailError}=await sb.functions.invoke('notify-admission',{body:{applicationId:data.id}});if(mailError)throw mailError;if(mailData?.emailConfigured===false)emailNote=' The application is safely in the dashboard; email confirmation is being configured.'}catch(err){console.warn('Admission notification:',err);emailNote=' The application is safely in the dashboard even though the email notification could not be confirmed.'}
